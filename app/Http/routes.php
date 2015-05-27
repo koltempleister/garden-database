@@ -20,4 +20,7 @@ Route::controllers([
 	'password' => 'Auth\PasswordController',
 ]);
 
-Route::get('stock','StockController@index');
+Route::get('stock','StockItemsController@index');
+Route::get('seeds','SeedsController@index');
+Route::get('seeds/create','SeedsController@create');
+Route::get('seeds/{id}','SeedsController@show');

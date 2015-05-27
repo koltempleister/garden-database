@@ -8,5 +8,9 @@ class Seed extends Model {
         'name',
         'remarks'
     ];
-
+    
+    public function stock_items()
+    {
+        return $this->hasMany('App\Stock_item');
+    }
 }
