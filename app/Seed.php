@@ -13,4 +13,80 @@ class Seed extends Model {
     {
         return $this->hasMany('App\Stock_item');
     }
+    
+    public function species()
+    {
+        return $this->belongsTo('App\Species');
+    }
+    
+    /**
+     * 
+     * return an array of species ids
+     * 
+     * @return array
+     */
+    public function getSpeciesListAttribute()
+    {
+        return $this->species()->lists('id');
+    }
+    
+    /**
+     * returns an array of sowing periods
+     * 
+     * @return array
+     */
+    public static function sowingPeriods()
+    {
+        $month = 1;
+        while($month < 13)
+        {
+            $month_name = date('F', mktime(0,0,0,$month));
+            $periods[SowingPeriod::full_month($month)->as_string()]                   = $month_name;
+            $periods[SowingPeriod::beginning_of($month)->as_string()] = 'Beginning of ' . $month_name;
+            $periods[SowingPeriod::half_of($month)->as_string()]      = 'Half of ' . $month_name;
+            $periods[SowingPeriod::end_of($month)->as_string()]       = 'End of ' . $month_name;
+            $month++;
+        }    
+        return $periods;
+    }
+    
+    public function getSowingPeriodsListAttribute()
+    {
+        return array_keys(self ::sowing_periods());
+    }
+}
+
+class SowingPeriod
+{
+    private $month;
+    
+    private function __construct($month)
+    {
+        $this->month = $month;
+    }
+    
+    public static function full_month($month)
+    {
+        return new static($month);
+    }
+    
+    public static function beginning_of($month)
+    {
+        return new static($month  + 0.1);
+    }
+    
+    public static function half_of($month)
+    {
+        return new static($month + 0.5);
+    }
+    
+    public static function end_of($month)
+    {
+        return new static($month + 0.9);
+    }
+    
+    public function as_string()
+    {
+        return (string) $this->month;
+    }
 }

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Controller;
 use App\Seed;
+use App\Species;
 
 class SeedsController extends Controller {
 
@@ -14,7 +15,7 @@ class SeedsController extends Controller {
 
      public function show($id)
      {
-         $seed = Seed::find($id);
+         $seed = Seed::find($id); 
          
          if(is_null($seed))
          {
@@ -26,7 +27,10 @@ class SeedsController extends Controller {
      
      public function create()
      {
-         return view('seeds.create');
+         $species = Species::lists('name');
+         $sowing_periods = Seed::sowingPeriods(); 
+        //dd($sowing_periods); 
+        return view('seeds.create', compact('species', 'sowing_periods'));
      }
 
 }
