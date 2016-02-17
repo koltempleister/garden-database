@@ -18,9 +18,12 @@ Route::get('/', 'HomeController@index');
 Route::controllers([
 	'auth' => 'Auth\AuthController',
 	'password' => 'Auth\PasswordController',
+	
 ]);
 
+Route::resource('seeds', 'SeedsController');
+
 Route::get('stock','StockItemsController@index');
-Route::get('seeds','SeedsController@index');
-Route::get('seeds/create','SeedsController@create');
-Route::get('seeds/{id}','SeedsController@show');
+//Route::get('seeds','SeedsController@index');
+//Route::get('seeds/create','SeedsController@create');
+//Route::get('seeds/{id}','SeedsController@show');

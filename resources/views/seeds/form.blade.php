@@ -6,9 +6,9 @@
             {!! Form::label('remarks', 'Remarks:') !!}
             {!! Form::textarea('remarks', null, ['class' => 'form-control']) !!}
         </div>
-        <div class="form-group">
+       <div class="form-group">
             {!! Form::label('species_list', 'Species:') !!}
-            {!! Form::select('species_list', $species, null, ['class' => 'form-control']) !!}
+            {!! Form::select('species_id', $species, null, ['class' => 'form-control']) !!}
         </div>
        <div class="form-group">
             <div class="col-md-6">

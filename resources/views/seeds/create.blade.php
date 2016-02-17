@@ -3,10 +3,10 @@
 @section('content')
 <div class="container">
     <h1>Add new seed</h1>
-    {!! Form::open() !!}
+    {!! Form::open(array('action' => 'SeedsController@store')) !!}
            @include('seeds.form')
         <div class="form-group">
-            {!! Form::button('send', null, ['class' => 'form-control']) !!}
+            {!! Form::submit('send') !!}
         </div>      
     {!! Form::close() !!}
 </div>
