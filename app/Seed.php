@@ -6,8 +6,11 @@ class Seed extends Model {
 
     protected $fillable = [
         'name',
-        'remarks'
+        'remarks',
+        'species_id'
     ];
+
+    public $timestamps = false;
     
     public function stock_items()
     {
@@ -29,6 +32,46 @@ class Seed extends Model {
     {
         return $this->species()->lists('id');
     }
+
+    public function getOutsideFromAttribute($value)
+    {
+        return is_null($value) ? 'nvt' : self::sowingPeriods()[$value];
+    }
+
+    public function getOutsideTillAttribute($value)
+    {
+        return is_null($value) ? 'nvt' : self::sowingPeriods()[$value];
+    }
+    
+    public function getInsideFromAttribute($value)
+    {
+        return is_null($value) ? 'nvt' : self::sowingPeriods()[$value];
+    }
+
+    public function getInsideTillAttribute($value)
+    {
+        return is_null($value) ? 'nvt' : self::sowingPeriods()[$value];
+    }
+    
+    public function getHarvestFromAttribute($value)
+    {
+        return is_null($value) ? 'nvt' : self::sowingPeriods()[$value];
+    }
+
+    public function getHarvestTillAttribute($value)
+    {
+        return is_null($value) ? 'nvt' : self::sowingPeriods()[$value];
+    }
+    
+    public function getPlantOutFromAttribute($value)
+    {
+        return is_null($value) ? 'nvt' : self::sowingPeriods()[$value];
+    }
+
+    public function getPlantOutTillAttribute($value)
+    {
+        return is_null($value) ? 'nvt' : self::sowingPeriods()[$value];
+    }
     
     /**
      * returns an array of sowing periods
@@ -38,6 +81,9 @@ class Seed extends Model {
     public static function sowingPeriods()
     {
         $month = 1;
+
+        $periods[] = 'nvt';
+
         while($month < 13)
         {
             $month_name = date('F', mktime(0,0,0,$month));
@@ -52,7 +98,7 @@ class Seed extends Model {
     
     public function getSowingPeriodsListAttribute()
     {
-        return array_keys(self ::sowing_periods());
+        return array_keys(self ::sowingPeriods());
     }
 }
 
