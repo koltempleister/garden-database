@@ -37,14 +37,13 @@ class SeedsController extends Controller {
      {
          $species = Species::lists('name','id');
          $sowing_periods = Seed::sowingPeriods(); 
-         $seed = new Seed();
-        // dd($species); 
+         $seed = new Seed(); //initialise otherwise form fails!
+
         return view('seeds.create', compact('seed', 'species','sowing_periods'));
      }
 
      public function store(CreateSeed $request)
      {
-        //dd($request->all());
         Seed::create($request->all());
         
         return redirect('seeds');

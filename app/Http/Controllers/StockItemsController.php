@@ -9,24 +9,12 @@ use App\Supplier;
 
 class StockItemsController extends Controller {
 
-    public function index($status)
+    public function index()
     {
-    	$seeds = Seed :: whereHas('stock_items', function($q){
-    		$q->where('status', '<>', 'niet meer in voorraad');
-    	})->get();
-    	//dd($seeds);
-    	// if(!is_null($status = null))
-    	// {
-    	// 	$status =  Stock_item :: statuses($status);
-    	// 	//dd($status);
-    		
-    	// }
-    	// else
-    	// {
-    	// 	$seeds = Seed :: has('stock_items')->get();
-    	// }
-    	
-
+    	/**
+    	 *@todo filtering  
+    	 */
+    	$seeds = Seed :: has('stock_items')->get();
     	
     	$statuses = Stock_item::statuses();
     	return view('stock_items.index', compact('seeds', 'statuses'));
@@ -41,12 +29,11 @@ class StockItemsController extends Controller {
     public function create($id)
     {
     	$seed = Seed::findOrFail($id);
-    	$statuses = Stock_item::distinct()->lists('status');
+    	$statuses = Stock_item::statuses();
     	$supplier_list = Supplier::lists('name', 'id');
-    	$stock_item = new Stock_item();
+    	$stock_item = new Stock_item(); //intitialise otherwise form fails!
 
-
-    	return view('stock_items.create', compact('seed','supplier_list', 'statuses', 'stock_item'));
+		return view('stock_items.create', compact('seed','supplier_list', 'statuses', 'stock_item'));
     }
 
     public function store(CreateStockItem $request)
@@ -59,7 +46,7 @@ class StockItemsController extends Controller {
     public function edit($id)
     {
     	$stock_item = Stock_item::findOrFail($id);
-    	$statuses = Stock_item::distinct()->lists('status');
+    	$statuses = Stock_item::statuses();
     	$supplier_list = Supplier::lists('name', 'id');
 
     	return view('stock_items.edit', compact('stock_item', 'statuses', 'supplier_list'));

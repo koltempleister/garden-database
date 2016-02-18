@@ -34,6 +34,11 @@ class Seed extends Model {
         return $this->belongsTo('App\Species');
     }
     
+    public function getNameAttribute($value)
+    {
+        return ucfirst($value);
+    }
+
     /**
      * 
      * return an array of species ids

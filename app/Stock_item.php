@@ -35,10 +35,10 @@ class Stock_item extends Model {
         @param $status_value 
         @return key or array
     */
-    public static function statuses($status_value = null)
+    public static function statuses()
     {
         // dd($status_value);
-        return is_null($status_value) ? self::$statuses : array_search($status_value, self::$statuses);
+        return self::$statuses;
     }
 
 }
