@@ -7,7 +7,19 @@ class Seed extends Model {
     protected $fillable = [
         'name',
         'remarks',
-        'species_id'
+        'species_id', 
+        'outside_from',
+        'outside_till',
+        'inside_from',
+        'inside_till',
+        'harvest_from',
+        'harvest_till',
+        'time_till_harvest',
+        'row_distance_cm',
+        'thin_out_cm',
+        'replant_possible',
+        'plant_out_from',
+        'plant_out_till'
     ];
 
     public $timestamps = false;
@@ -35,42 +47,42 @@ class Seed extends Model {
 
     public function getOutsideFromAttribute($value)
     {
-        return is_null($value) ? 'nvt' : self::sowingPeriods()[$value];
+        return array('value' => $value , 'formatted' => is_null($value) ? 'nvt' : self::sowingPeriods()[$value]);
     }
 
     public function getOutsideTillAttribute($value)
     {
-        return is_null($value) ? 'nvt' : self::sowingPeriods()[$value];
+        return array('value' => $value , 'formatted' => is_null($value) ? 'nvt' : self::sowingPeriods()[$value]);
     }
     
     public function getInsideFromAttribute($value)
     {
-        return is_null($value) ? 'nvt' : self::sowingPeriods()[$value];
+        return array('value' => $value , 'formatted' => is_null($value) ? 'nvt' : self::sowingPeriods()[$value]);
     }
 
     public function getInsideTillAttribute($value)
     {
-        return is_null($value) ? 'nvt' : self::sowingPeriods()[$value];
+        return array('value' => $value , 'formatted' => is_null($value) ? 'nvt' : self::sowingPeriods()[$value]);
     }
     
     public function getHarvestFromAttribute($value)
     {
-        return is_null($value) ? 'nvt' : self::sowingPeriods()[$value];
+        return array('value' => $value , 'formatted' => is_null($value) ? 'nvt' : self::sowingPeriods()[$value]);
     }
 
     public function getHarvestTillAttribute($value)
     {
-        return is_null($value) ? 'nvt' : self::sowingPeriods()[$value];
+        return array('value' => $value , 'formatted' => is_null($value) ? 'nvt' : self::sowingPeriods()[$value]);
     }
     
     public function getPlantOutFromAttribute($value)
     {
-        return is_null($value) ? 'nvt' : self::sowingPeriods()[$value];
+        return array('value' => $value , 'formatted' => is_null($value) ? 'nvt' : self::sowingPeriods()[$value]);
     }
 
     public function getPlantOutTillAttribute($value)
     {
-        return is_null($value) ? 'nvt' : self::sowingPeriods()[$value];
+        return array('value' => $value , 'formatted' => is_null($value) ? 'nvt' : self::sowingPeriods()[$value]);
     }
     
     /**

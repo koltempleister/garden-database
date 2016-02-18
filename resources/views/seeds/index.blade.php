@@ -15,7 +15,7 @@
 					@foreach($seeds as $seed)
                         
                         <article>
-                            <p>{{$seed->name}} - [stock] ({{count($seed->stock_items)}}) <a href="seeds/edit/{{$seed->id}}">[update]</a> <a href="seeds/{{$seed->id}}">[details]</a></p>
+                            <p>{{$seed->name}} - <a href="/stock/{{$seed->id}}">[stock]</a> ({{count($seed->stock_items)}}) <a href="seeds/{{$seed->id}}/edit">[update]</a> <a href="seeds/{{$seed->id}}">[details]</a>[delete]</p>
                         </article>
                     @endforeach
 				</div>

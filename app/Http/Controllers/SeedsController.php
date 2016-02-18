@@ -1,6 +1,7 @@
 <?php namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Request;
 use App\Http\Requests\CreateSeed;
 use App\Seed;
 use App\Species;
@@ -16,6 +17,7 @@ class SeedsController extends Controller {
      {
          // $seeds = Seed::has('stock_items')->get();
          $seeds =  Seed::paginate(15);
+         Species :: tree();
          return view('seeds.index', compact('seeds', $seeds));
      }
 
@@ -33,10 +35,11 @@ class SeedsController extends Controller {
      
      public function create()
      {
-         $species = Species::lists('name');
+         $species = Species::lists('name','id');
          $sowing_periods = Seed::sowingPeriods(); 
+         $seed = new Seed();
         // dd($species); 
-        return view('seeds.create', ['species' => $species,'sowing_periods' => $sowing_periods]);
+        return view('seeds.create', compact('seed', 'species','sowing_periods'));
      }
 
      public function store(CreateSeed $request)
@@ -46,8 +49,24 @@ class SeedsController extends Controller {
         
         return redirect('seeds');
      }
-//     
-//     public function get(){}
-//     public function post(){}
+
+     public function edit($id)
+     {
+         $seed = Seed::findOrFail($id); 
+         $species = Species::lists('name','id');
+         $sowing_periods = Seed::sowingPeriods();
+         
+         return view('seeds.edit', compact('seed', 'species', 'sowing_periods'));
+     }
+
+     public function update($id, CreateSeed $request)
+     {
+         $seed = Seed::findOrFail($id);
+         $seed->update($request->all());
+
+         return redirect('seeds');
+     }
+
+
 
 }

@@ -8,12 +8,12 @@
         </div>
        <div class="form-group">
             {!! Form::label('species_list', 'Species:') !!}
-            {!! Form::select('species_id', $species, null, ['class' => 'form-control']) !!}
+            {!! Form::select('species_id', $species, $seed->species_id, ['class' => 'form-control']) !!}
         </div>
        <div class="form-group">
             <div class="col-md-6">
                 {!! Form::label('outside_from', 'Sow outside from:') !!}
-                {!! Form::select('outside_from', $sowing_periods, null, ['class' => 'form-control']) !!}
+                {!! Form::select('outside_from', $sowing_periods, $seed->outside_from['value'], ['class' => 'form-control']) !!}
             </div>
             <div class="col-md-6">
                  {!! Form::label('outside_till', 'Sow outside till:') !!}

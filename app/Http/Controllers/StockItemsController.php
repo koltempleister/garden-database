@@ -1,15 +1,74 @@
 <?php namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CreateStockItem;
+use App\Http\Requests\SearchStockItem;
 use App\Seed;
+use App\Stock_item;
+use App\Supplier;
 
 class StockItemsController extends Controller {
 
-    public function index()
+    public function index($status)
     {
-        $stock_items = Seed::has('stock_items')->get();
-        //return $stock_items;
-        return view('stock_items.index', compact('stock_items', $stock_items));
+    	$seeds = Seed :: whereHas('stock_items', function($q){
+    		$q->where('status', '<>', 'niet meer in voorraad');
+    	})->get();
+    	//dd($seeds);
+    	// if(!is_null($status = null))
+    	// {
+    	// 	$status =  Stock_item :: statuses($status);
+    	// 	//dd($status);
+    		
+    	// }
+    	// else
+    	// {
+    	// 	$seeds = Seed :: has('stock_items')->get();
+    	// }
+    	
+
+    	
+    	$statuses = Stock_item::statuses();
+    	return view('stock_items.index', compact('seeds', 'statuses'));
+    }
+    public function show($id)
+    {
+        $stock_items = Stock_item :: where('seed_id' , '=', $id)->orderBy('seed_id')->get();        
+        
+        return view('stock_items.show', compact('stock_items'));
     }
 
+    public function create($id)
+    {
+    	$seed = Seed::findOrFail($id);
+    	$statuses = Stock_item::distinct()->lists('status');
+    	$supplier_list = Supplier::lists('name', 'id');
+    	$stock_item = new Stock_item();
+
+
+    	return view('stock_items.create', compact('seed','supplier_list', 'statuses', 'stock_item'));
+    }
+
+    public function store(CreateStockItem $request)
+    {
+    	Stock_item :: create($request->all());
+		
+		return redirect('stock/' . $request->seed_id);
+    }
+
+    public function edit($id)
+    {
+    	$stock_item = Stock_item::findOrFail($id);
+    	$statuses = Stock_item::distinct()->lists('status');
+    	$supplier_list = Supplier::lists('name', 'id');
+
+    	return view('stock_items.edit', compact('stock_item', 'statuses', 'supplier_list'));
+    }
+
+    public function update(CreateStockItem $request)
+    {
+    	Stock_item::update($request->all());
+
+    	return redirect('stock/' . $request->seed_id);
+    }
 }
