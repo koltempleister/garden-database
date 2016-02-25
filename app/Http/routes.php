@@ -25,7 +25,5 @@ Route::get('stock/create/{seed_id}', 'StockItemsController@create');
 Route::resource('seeds', 'SeedsController');
 Route::resource('stock', 'StockItemsController');
 
-//Route::get('stock','StockItemsController@index');
-//Route::get('seeds','SeedsController@index');
-//Route::get('seeds/create','SeedsController@create');
-//Route::get('seeds/{id}','SeedsController@show');
+Route::get('sowings/{year}', 'SowingsController@index')->where('year', '[0-9]+');
+Route::resource('sowings', 'SowingsController');

@@ -15,10 +15,11 @@ class CreateSowingsTable extends Migration {
 		Schema::create('sowings', function(Blueprint $table)
 		{
 			$table->integer('id', true);
-			$table->integer('seed_id')->index('zaad_id');
-			$table->integer('place_id');
-			$table->date('date');
-			$table->boolean('harvested');
+			$table->integer('stock_item_id')->index('stock_item_id');
+			$table->integer('place_id')->index('place_id');
+			$table->date('sow_date')->nullable();
+			$table->date('harvest_date')->nullable();
+			$table->integer('year');
 		});
 	}
 

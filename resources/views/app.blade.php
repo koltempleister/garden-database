@@ -35,6 +35,7 @@
 				<ul class="nav navbar-nav">
 					<li><a href="{{ url('/seeds') }}">Seeds</a></li>
 					<li><a href="{{ url('/stock') }}">Stock</a></li>
+					<li><a href="{{ url('/sowings/' . date('Y')) }}">Sowings</a></li>
 				</ul>
 
 				<ul class="nav navbar-nav navbar-right">
