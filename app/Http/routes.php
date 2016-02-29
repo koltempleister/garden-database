@@ -13,7 +13,9 @@
 
 //Route::get('/', 'WelcomeController@index');
 
-Route::get('/', 'HomeController@index');
+Route::get('/', 'SeedsController@index');
+
+Route::get('calendar/{month}', 'CalendarController@index');
 
 Route::controllers([
 	'auth' => 'Auth\AuthController',

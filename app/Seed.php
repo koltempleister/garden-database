@@ -117,6 +117,11 @@ class Seed extends Model {
     {
         return array_keys(self ::sowingPeriods());
     }
+
+    public function scopeCanSowThisMonth($query, $month)
+    {
+        return $query->where('outside_from' , '<=' , $month)->where('outside_till', '>=', $month );
+    }
 }
 
 class SowingPeriod

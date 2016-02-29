@@ -17,12 +17,9 @@ class SowingsController extends Controller {
 	 */
 	public function index($year)
 	{
-		// $places = DB :: table('places')
-		// 		->leftjoin('sowings', 'sowings.place_id' , '=' , 'places.id')
-		// 		->where('sowings.year' , '=' , '2015')
-		// 		->get();
-//$year = 2015;
-
+		/**
+		* get all places that have sowings in a specific year 
+		*/
 		$places =  Place :: whereHas('sowings', function($query) use ($year){
 			$query->where('year','=',$year);
 		})->get();
@@ -102,9 +99,12 @@ class SowingsController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id)
+	public function update($id, CreateSowing $request)
 	{
-		//
+		$sowing = Sowing :: findOrFail($id);
+		$sowing->update($request->all());
+		
+		return redirect('sowings/' . $sowing->year);
 	}
 
 	/**

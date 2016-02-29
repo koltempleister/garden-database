@@ -11,7 +11,7 @@
 		<div class="col-md-10">
 			 <ul class="nav nav-pills">
 			  @foreach($years as $year)
-			  	<li role="presentation"><a href="{{$year}}">{{$year}}</a></li>
+			  <li role="presentation"><a href="{{$year}}">{{$year}}</a></li>
 			  @endforeach
 			  	<li role="presentation"><a href="/sowings/create">Add sowing</a></li>
 			</ul>
