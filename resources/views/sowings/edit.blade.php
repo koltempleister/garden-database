@@ -8,6 +8,7 @@
         <div class="form-group">
         	{!! Form::submit('update') !!}
         </div>      
+    	{!!Form::hidden('seed_id', null) !!}
     {!! Form::close() !!}
 </div>
 @endsection

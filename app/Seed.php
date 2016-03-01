@@ -34,6 +34,11 @@ class Seed extends Model {
         return $this->belongsTo('App\Species');
     }
     
+    public function sowings()
+    {
+        return $this->hasMany('App\Sowing');
+    }
+
     public function getNameAttribute($value)
     {
         return ucfirst($value);

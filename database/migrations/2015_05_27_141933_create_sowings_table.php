@@ -20,6 +20,7 @@ class CreateSowingsTable extends Migration {
 			$table->date('sow_date')->nullable();
 			$table->date('harvest_date')->nullable();
 			$table->integer('year');
+			$table->integer('seed_id');
 		});
 	}
 

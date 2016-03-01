@@ -60,9 +60,14 @@ class SowingsController extends Controller {
 	 */
 	public function store(CreateSowing $request)
 	{
-		$sowing = Sowing :: create($request->all());
+		$sowing = new Sowing($request->all());
 
 
+		$stock_item = Stock_item :: find($sowing->stock_item_id);
+		$seed_id = $stock_item->seed->id;
+		$sowing->seed_id = $seed_id;
+
+		$sowing->save();
 
 		return redirect('sowings/' . $sowing->year);
 	}

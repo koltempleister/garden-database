@@ -23,4 +23,9 @@ class Sowing extends Model {
 	{
 		return $this->belongsTo('App\Stock_item'); 		
 	}  
+
+	public function seed()
+	{
+		return $this->belongsTo('App\Seed');
+	}
 }

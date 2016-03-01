@@ -14,8 +14,11 @@ class StockItemsController extends Controller {
     	/**
     	 *@todo filtering  
     	 */
-    	$seeds = Seed :: has('stock_items')->get();
-    	
+    	// $seeds = Seed :: has('stock_items')->get();
+    	$seeds = Seed :: with('stock_items')->whereHas('stock_items',function($query){
+    		$query->where('status', '=','niet meer in voorraad');
+    	})->get();
+
     	$statuses = Stock_item::statuses();
     	return view('stock_items.index', compact('seeds', 'statuses'));
     }

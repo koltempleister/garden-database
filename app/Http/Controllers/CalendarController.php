@@ -5,9 +5,8 @@ use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 
-use App\Seed;
-use App\Stock_item;
 use App\Sowing;
+use App\Place;
 
 class CalendarController extends Controller {
 
@@ -19,6 +18,13 @@ class CalendarController extends Controller {
 	public function index($month)
 	{
 		//get all seeds that can be sown in a specific month
+		$sowings = Sowing::whereHas('seed',function($query) use ($month){
+			$query->canSowThisMonth($month);
+		})->where('year','=',date('Y'))->get();
+
+		$places = Place :: all();
+
+		return view('calendar.index', compact('month', 'places','sowings'));
 	}
 
 	/**
