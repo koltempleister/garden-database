@@ -15,9 +15,7 @@ class StockItemsController extends Controller {
     	 *@todo filtering  
     	 */
     	// $seeds = Seed :: has('stock_items')->get();
-    	$seeds = Seed :: with('stock_items')->whereHas('stock_items',function($query){
-    		$query->where('status', '=','niet meer in voorraad');
-    	})->get();
+    	$seeds = Seed :: available()->get();
 
     	$statuses = Stock_item::statuses();
     	return view('stock_items.index', compact('seeds', 'statuses'));
@@ -55,9 +53,10 @@ class StockItemsController extends Controller {
     	return view('stock_items.edit', compact('stock_item', 'statuses', 'supplier_list'));
     }
 
-    public function update(CreateStockItem $request)
+    public function update($id, CreateStockItem $request)
     {
-    	Stock_item::update($request->all());
+    	$stock_item = Stock_item::findOrFail($id);
+        $stock_item->update($request->all());
 
     	return redirect('stock/' . $request->seed_id);
     }

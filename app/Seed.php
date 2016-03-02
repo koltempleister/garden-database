@@ -127,6 +127,13 @@ class Seed extends Model {
     {
         return $query->where('outside_from' , '<=' , $month)->where('outside_till', '>=', $month );
     }
+
+    public function scopeAvailable($query)
+    {
+        return $query->whereHas('stock_items',function($query){
+            $query->where('status', '=','in voorraad')->where('fresh_untill' ,'>=', date('Y'));
+        },'=', 0);
+    }
 }
 
 class SowingPeriod
@@ -162,4 +169,6 @@ class SowingPeriod
     {
         return (string) $this->month;
     }
+
+    
 }
