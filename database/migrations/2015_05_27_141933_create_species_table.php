@@ -16,7 +16,7 @@ class CreateSpeciesTable extends Migration {
 		{
 			$table->integer('id', true);
 			$table->string('name')->unique('naam');
-			$table->integer('parent_id')->nullable()->default(0);
+			$table->integer('parent_id')->nullable()->default(0);	
 		});
 	}
 

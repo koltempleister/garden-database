@@ -16,6 +16,7 @@
 Route::get('/', 'SeedsController@index');
 
 Route::get('calendar/{month}', 'CalendarController@index');
+Route::get('migrate_tree', 'SeedsController@migrate_tree');
 
 Route::controllers([
 	'auth' => 'Auth\AuthController',

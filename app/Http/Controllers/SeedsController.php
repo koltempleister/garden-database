@@ -21,6 +21,14 @@ class SeedsController extends Controller {
          return view('seeds.index', compact('seeds', $seeds));
      }
 
+     public function migrate_tree()
+     {
+
+        /**
+         * fixes left and right based upon parent_id
+         */
+        Species :: fixTree();
+     }
      public function show($id)
      {
          $seed = Seed::find($id); 
