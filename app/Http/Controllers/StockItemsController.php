@@ -15,7 +15,7 @@ class StockItemsController extends Controller {
     	 *@todo filtering  
     	 */
     	// $seeds = Seed :: has('stock_items')->get();
-    	$seeds = Seed :: available()->get();
+    	$seeds = Seed :: unavailable()->get();
 
     	$statuses = Stock_item::statuses();
     	return view('stock_items.index', compact('seeds', 'statuses'));
