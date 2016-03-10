@@ -74,6 +74,6 @@ class SeedsController extends Controller {
          return redirect('seeds');
      }
 
-
+     
 
 }
