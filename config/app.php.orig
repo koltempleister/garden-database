@@ -2,6 +2,7 @@
 
 return [
 
+<<<<<<< HEAD
     /*
     |--------------------------------------------------------------------------
     | Application Environment
@@ -27,8 +28,22 @@ return [
     */
 
     'debug' => env('APP_DEBUG', false),
+=======
+	/*
+	|--------------------------------------------------------------------------
+	| Application Debug Mode
+	|--------------------------------------------------------------------------
+	|
+	| When your application is in debug mode, detailed error messages with
+	| stack traces will be shown on every error that occurs within your
+	| application. If disabled, a simple generic error page is shown.
+	|
+	*/
+
+	 'env' => env('APP_ENV', 'production'),
 	 'debug' => env('APP_DEBUG', false),
 
+>>>>>>> fcc3a620ae6c26a7aec2a965017c555bd78774d0
 
 	/*
 	|--------------------------------------------------------------------------
