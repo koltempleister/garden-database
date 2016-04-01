@@ -7,6 +7,8 @@ class Species extends Model {
 
     use NodeTrait;
 
+    public $timestamps = false;
+
 	public function seeds()
     {
         return $this->hasMany('App\Seeds');
