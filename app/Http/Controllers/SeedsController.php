@@ -1,11 +1,11 @@
 <?php namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Request;
 use App\Http\Requests\CreateSeed;
 use App\Seed;
 use App\Species;
-use App\Handler\Session;
+use App\Handler\Session\SessionWatcher;
+use App\Handler\Session\WatchedSession;
 
 class SeedsController extends Controller
 {
@@ -15,19 +15,16 @@ class SeedsController extends Controller
         $this->middleware('auth');
     }
 
-    public function index()
+    public function index(SessionWatcher $sessionWatcher)
     {
 
         $search = Request::get('q');
 
         $filter_on_species = Request::get('species');
 
-        SessionHandler::handleVar('search', $search, !is_null($search));
+        $sessionWatcher->watch(new WatchedSession('search', !is_null($search), $search));
+        $sessionWatcher->watch(new WatchedSession('filter_on_species', $filter_on_species !== 0 , $filter_on_species));
         
-        SessionHandler::handleVar('filter_on_species', $filter_on_species, $filter_on_species !== 0);
-
-        $has_session = false;
-
         $seeds_query = null;
 
         if (Session::get('search') != false) {
@@ -41,7 +38,6 @@ class SeedsController extends Controller
         var_Dump(Session::get('search'));
 
         if (Session::get('filter_on_species')) {
-            $has_session = true;
             if (!is_null($seeds_query)) {
                 $seeds_query = $seeds_query->filterSpecies(Session::get('filter_on_species'));
             } else {
@@ -49,7 +45,7 @@ class SeedsController extends Controller
             }
         }
         
-        if (!$has_session) {
+        if ($sessionWatcher->watchedSessionIsRegistered()) {
             $seeds = Seed::paginate(15); //show all seeds paginated
         } else {
             //$seeds = $seeds_query->paginate(15);
