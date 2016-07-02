@@ -13,6 +13,8 @@
 
 //Route::get('/', 'WelcomeController@index');
 
+
+
 Route::get('/', 'SeedsController@index');
 
 Route::get('calendar/{month}', 'CalendarController@index');

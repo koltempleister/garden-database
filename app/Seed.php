@@ -134,6 +134,21 @@ class Seed extends Model {
             $query->where('status', '=','in voorraad')->where('fresh_untill' ,'>=', date('Y'));
         },'=', 0);
     }
+
+    public function scopeSearch($query, $search)
+    {
+        return $query->where('name','LIKE', '%'. $search .'%');
+    }
+
+    public function scopeFilterSpecies($query, $species_id)
+    {
+        //return $query->where('species_id','=', $species_id);
+        return $query->whereHas('species', function($query) use ($species_id)
+        {
+            return $query->where('id','=', $species_id)->children();
+        });
+
+    }
 }
 
 class SowingPeriod
