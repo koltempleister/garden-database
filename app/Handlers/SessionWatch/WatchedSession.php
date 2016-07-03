@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Handler\Session;
+namespace App\Handlers\SessionWatch;
 
 /**
  * Class WatchedSession
@@ -22,6 +22,7 @@ class WatchedSession
     {
         $this->name = $name;
         $this->watch = $watch;
+        $this->value = $value;
     }
 
     /**
@@ -29,7 +30,7 @@ class WatchedSession
      */
     public function name()
     {
-        return $name;
+        return $this->name;
     }
 
     /**
@@ -37,7 +38,7 @@ class WatchedSession
      */
     public function watch()
     {
-        return $watch;
+        return $this->watch;
     }
 
     /**
@@ -45,6 +46,6 @@ class WatchedSession
      */
     public function value()
     {
-        return $value;
+        return $this->value;
     }
-}}
+}

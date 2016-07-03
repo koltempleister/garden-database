@@ -4,8 +4,9 @@ use Illuminate\Support\Facades\Request;
 use App\Http\Requests\CreateSeed;
 use App\Seed;
 use App\Species;
-use App\Handler\Session\SessionWatcher;
-use App\Handler\Session\WatchedSession;
+use App\Handlers\SessionWatch\SessionWatcher;
+use App\Handlers\SessionWatch\WatchedSession;
+use \Session;
 
 class SeedsController extends Controller
 {
@@ -30,11 +31,6 @@ class SeedsController extends Controller
             $has_session = true;
             $seeds_query = Seed::search(Session::get('search'));
         }
-
-        var_Dump($filter_on_species);
-        var_Dump(Session::get('filter_on_species'));
-        var_Dump($search);
-        var_Dump(Session::get('search'));
 
         if (Session::get('filter_on_species')) {
             if (!is_null($seeds_query)) {
