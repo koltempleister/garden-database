@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "3e40c68e73acf7c1e7250eb3f23c571d",
-    "content-hash": "0ca08b4654474414a8d715fccc2e11a9",
+    "hash": "94329af0d7a99f2de540c7fc1523c12e",
+    "content-hash": "751f6be31b6b3a0a08e7946e0019f592",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -2081,6 +2081,58 @@
                 "laravel"
             ],
             "time": "2015-12-31 18:44:32"
+        },
+        {
+            "name": "laracasts/testdummy",
+            "version": "2.3.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laracasts/TestDummy.git",
+                "reference": "ba986a66b6f4a1e149355357353af3072d5521ee"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laracasts/TestDummy/zipball/ba986a66b6f4a1e149355357353af3072d5521ee",
+                "reference": "ba986a66b6f4a1e149355357353af3072d5521ee",
+                "shasum": ""
+            },
+            "require": {
+                "fzaninotto/faker": "~1.4",
+                "illuminate/support": "~4.0|~5.0",
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "illuminate/database": "~4.0|~5.0",
+                "phpspec/phpspec": "~2.0",
+                "phpunit/phpunit": "~4.7@dev"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Laracasts\\TestDummy\\": "src/"
+                },
+                "files": [
+                    "src/functions.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jeffrey Way",
+                    "email": "jeffrey@laracasts.com"
+                }
+            ],
+            "description": "Easy test stubs",
+            "keywords": [
+                "factorygirl",
+                "laravel",
+                "stubs",
+                "testing"
+            ],
+            "time": "2015-04-27 15:56:12"
         },
         {
             "name": "mockery/mockery",

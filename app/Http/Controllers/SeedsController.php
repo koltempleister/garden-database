@@ -17,7 +17,6 @@ class SeedsController extends Controller
 
     public function index(SessionWatcher $sessionWatcher)
     {
-
         $search = Request::get('q');
 
         $filter_on_species = Request::get('species');
