@@ -5,6 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 
 class CreateStockItemsTable extends Migration {
 
+	use \Illuminate\Foundation\Testing\DatabaseTransactions;
 	/**
 	 * Run the migrations.
 	 *

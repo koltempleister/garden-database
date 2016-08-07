@@ -1,18 +1,16 @@
 <?php
 
-use Laracasts\TestDummy\DbTestCase;
-
-class SpeciesTest extends DbTestCase
+class SpeciesTest extends TestCase
 {
     protected $item;
 
+    use \Illuminate\Foundation\Testing\DatabaseTransactions;
 
     public function setUp()
     {
         parent::setUp();
 
-        $this->item = \Faker\Factory::create('App\Species');
-        dd($this->item->name);
+        $this->item = factory('App\Species')->create();
     }
 
     public function testChild()
@@ -26,29 +24,16 @@ class SpeciesTest extends DbTestCase
         //assert number of children and id of parent
         $this->assertEquals(count($children), 1);
         $this->assertEquals(
-            $children->first()->parent()->id,
-            $this->item_id
-        );
-
-        //assert if child has parent_id
-        $this->assertEquals(
-            $child->parent()->id,
-            $this->item->id
+            $this->item->id,
+            $children->first()->parent_id
         );
     }
 
     public function createChild()
     {
-        $child = new App\Species(
-            [
-                'name' => 'test',
-                'parent_id' => $this->item->id
-            ]
-        );
-
-        $child->create();
-
-        return $child;
+        return factory('App\Species')->create([
+            'parent_id' => $this->item->id
+        ]);
     }
 
     public function testController()
