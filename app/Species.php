@@ -8,6 +8,12 @@ class Species extends Model {
     use NodeTrait;
 
     public $timestamps = false;
+
+	public $fillable = [
+		'name',
+		'parent_id'
+	];
+
 	public function seeds()
     {
         return $this->hasMany('App\Seeds');
@@ -53,4 +59,25 @@ class Species extends Model {
     	return $resultarray;	
     }
 
+	/**
+	 * @return array
+	 */
+	public static function parentsTreeArray()
+	{
+		$species_tree = self::get()->toTree();
+
+		$traverse = function ($categories, $prefix = '-') use (&$traverse) {
+			$out = [];
+			foreach ($categories as $category) {
+				$out[$category->id] = PHP_EOL.$prefix.' '.$category->name;
+
+				$out = array_merge($out, $traverse($category->children, $prefix.'-'));
+			}
+			return $out;
+		};
+
+		$parents[0] = 'root';
+
+		return array_merge($parents, $traverse($species_tree));
+	}
 }

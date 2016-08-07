@@ -6,19 +6,20 @@ class SpeciesTest extends DbTestCase
 {
     protected $item;
 
+
     public function setUp()
     {
         parent::setUp();
 
-        Artisan::call('migrate');
         $this->item = \Faker\Factory::create('App\Species');
+        dd($this->item->name);
     }
 
     public function testChild()
     {
         //create child
         $child = $this->createChild();
-        
+
         //get child
         $children = $this->item->children();
 
@@ -48,5 +49,12 @@ class SpeciesTest extends DbTestCase
         $child->create();
 
         return $child;
+    }
+
+    public function testController()
+    {
+        $this->visit('species')->assertResponseOk();
+        $this->visit('species/create')->assertResponseOk();
+
     }
 }

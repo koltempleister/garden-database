@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
+use \Request;
 
-use App\Http\Requests\CreateSpecies
+use App\Http\Requests\CreateSpecies;
 
 use App\Species;
 
@@ -32,30 +33,25 @@ class SpeciesController extends Controller
         $species = new Species;
         $species->parent_id = $parent_id;
 
-        return view('species.create', compact('species'));
+        $parents = Species::parentsTreeArray();
+
+        return view('species.create', compact('species', 'parents'));
     }
 
     public function edit($id)
     {
         $species = Species::find($id);
 
-        $species_tree = Species::get()->toTree();
-
-        $traverse = function ($categories, $prefix = '-') use (&$traverse) {
-            $out = [];
-            foreach ($categories as $category) {
-                $out[$category->id] = PHP_EOL.$prefix.' '.$category->name;
-
-                $out = array_merge($out, $traverse($category->children, $prefix.'-'));
-            }
-            return $out;
-        };
-
-        $parents[0] = 'root';
-        
-        $parents = array_merge($parents, $traverse($species_tree))s;
+        $parents = Species::parentsTreeArray();
         
         return view('species.edit',compact('species', 'parents'));
+    }
+
+    public function store(CreateSpecies $request)
+    {
+        Species::create($request->all());
+
+        return redirect('seeds');
     }
 
     public function update($id, CreateSpecies $request)

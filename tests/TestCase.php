@@ -2,6 +2,7 @@
 
 class TestCase extends Illuminate\Foundation\Testing\TestCase {
 
+	public $baseUrl = 'http://zaden.local';
 	/**
 	 * Creates the application.
 	 *
