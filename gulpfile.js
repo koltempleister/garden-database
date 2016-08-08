@@ -13,4 +13,12 @@ var elixir = require('laravel-elixir');
 
 elixir(function(mix) {
     mix.less('app.less');
+    mix.scriptsIn("public/js/some/directory");
+    mix.copy(
+        'react-bootstrap-treeview/src/react-bootstrap-treeview.js',
+        'public/js/react-bootstrap-treeview.js'
+    ).copy(
+        'react-bootstrap-treeview/src/react-bootstrap-treeview.css',
+        'public/css/react-bootstrap-treeview.js'
+    );
 });

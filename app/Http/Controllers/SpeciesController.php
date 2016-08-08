@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Transformers\SpeciesTreeTransformer;
 use Illuminate\Support\Facades\Redirect;
 use \Request;
+use Response;
 
 use App\Http\Requests\CreateSpecies;
 
@@ -11,19 +13,27 @@ use App\Species;
 
 class SpeciesController extends Controller
 {
-    public function index()
+    public function index(SpeciesTreeTransformer $transformer)
     {
-    	$species = Species::get()->toTree();
+        /**
+         * https://github.com/jonmiles/react-bootstrap-treeview
+         */
 
-        $traverse = function ($categories, $prefix = '-') use (&$traverse) {
-            foreach ($categories as $category) {
-                echo PHP_EOL.$prefix.' '.$category->name;
+        $species = Species::get()->toTree();
 
-                $traverse($category->children, $prefix.'-');
-            }
-        };
+        $species_transformed = $transformer->transformCollection($species);
 
-        return view('species.nodes', compact('species'));
+        if (Request::get('format') != 'ajax') {
+
+
+            return view('species.nodes', compact('species'));
+        } else {
+            return Response::json(
+                compact('species_transformed'),
+                200
+            );
+        }
+
     }
 
     public function create()
@@ -62,4 +72,6 @@ class SpeciesController extends Controller
 
         return redirect('seeds');
     }
+
+
 }

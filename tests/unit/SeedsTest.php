@@ -3,7 +3,7 @@
 
 class SeedsTest extends TestCase
 {
-   use \Illuminate\Foundation\Testing\DatabaseTransactions;
+    use \Illuminate\Foundation\Testing\DatabaseTransactions;
 
     public function testController()
     {
@@ -46,5 +46,13 @@ class SeedsTest extends TestCase
                 'replant_possible' => $seed->replant_possible
             ]
         );
+    }
+
+    /**
+     * @test
+     */
+    public function a_seed_belongs_to_a_species()
+    {
+        
     }
 }
