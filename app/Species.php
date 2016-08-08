@@ -16,7 +16,7 @@ class Species extends Model {
 
 	public function seeds()
     {
-        return $this->hasMany('App\Seeds');
+        return $this->hasMany('App\Seed');
     }
 
   

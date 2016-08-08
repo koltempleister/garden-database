@@ -47,4 +47,16 @@ class SeedsTest extends TestCase
             ]
         );
     }
+
+    /**
+     * @test
+     */
+    public function a_seed_belongs_to_a_species()
+    {
+        $seed = factory('App\Seed')->create();
+
+        $species = $seed->species()->first(); //why does belongsTo return a collection??
+
+        $this->assertEquals($seed->species_id, $species->id);
+    }
 }
