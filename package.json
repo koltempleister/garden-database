@@ -1,7 +1,10 @@
 {
   "private": true,
   "devDependencies": {
+    "bower": "^1.7.9",
     "gulp": "^3.8.8",
-    "laravel-elixir": "^1.0.0"
+    "laravel-elixir": "^1.0.0",
+    "react": "^15.3.0",
+    "react-bootstrap-treeview": "^0.1.0"
   }
 }

@@ -18,7 +18,7 @@ class SpeciesController extends Controller
         /**
          * https://github.com/jonmiles/react-bootstrap-treeview
          */
-
+//
         $species = Species::get()->toTree();
 
         $species_transformed = $transformer->transformCollection($species);
@@ -28,10 +28,12 @@ class SpeciesController extends Controller
 
             return view('species.nodes', compact('species'));
         } else {
-            return Response::json(
-                compact('species_transformed'),
-                200
-            );
+            //temp output view
+            return view('species.react', compact('species_transformed'));
+//            return Response::json(
+ //               compact('species_transformed'),
+   //             200
+     //       );
         }
 
     }
