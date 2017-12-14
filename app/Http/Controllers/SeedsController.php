@@ -81,7 +81,7 @@ class SeedsController extends Controller
     {
         $request->persist();
 
-        return redirect('seeds');
+        return redirect('/seed');
     }
 
     public function edit($seed)
@@ -96,6 +96,6 @@ class SeedsController extends Controller
     {
         $request->persist();
 
-        return redirect('seeds');
+        return redirect('/seed');
     }
 }
