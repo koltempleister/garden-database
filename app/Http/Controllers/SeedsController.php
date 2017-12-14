@@ -51,7 +51,9 @@ class SeedsController extends Controller
 
         $species = Species::get()->toTree();
 
-        return view('seeds.index', compact('seeds', 'species'));
+        return $seeds;
+
+     //   return view('seeds.index', compact('seeds', 'species'));
      }
 
     /**
@@ -65,8 +67,10 @@ class SeedsController extends Controller
 
     public function show($seed)
     {
-        return view('seeds.show', compact('seed'));
+        return $seed;
+       // return view('seeds.show', compact('seed'));
     }
+
 
     public function create()
     {

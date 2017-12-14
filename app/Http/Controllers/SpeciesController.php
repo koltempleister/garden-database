@@ -22,15 +22,16 @@ class SpeciesController extends Controller
 
         $species_transformed = $transformer->transformCollection($species);
 
-        if (Request::get('format') != 'ajax') {
-            return view('species.nodes', compact('species'));
-        } else {
-            $species_json = json_encode($species_transformed);
-            //temp output view
-            return view('species.vue', compact('species_json'));
+//        if (Request::get('format') != 'ajax') {
+//            return view('species.nodes', compact('species'));
+//        } else {
+//            $species_json = json_encode($species_transformed);
+//            temp output view
+//            return view('species.vue', compact('species_json'));
+//
+//        }
 
-        }
-
+        return $species_transformed;
     }
 
     public function create(\Illuminate\Http\Request $request)
@@ -43,6 +44,12 @@ class SpeciesController extends Controller
         $parents = Species::parentsTreeArray();
 
         return view('species.create', compact('species', 'parents'));
+    }
+
+    public function show($species)
+    {
+        return $species;
+
     }
 
     public function edit($species)

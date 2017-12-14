@@ -15,7 +15,7 @@
 Auth::routes();
 Route::get('/logout', 'Auth\LoginController@logout');
 
-Route::get('/', 'SeedsController@index');
+Route::get('/', 'HomeController@singlePage');
 
 Route::get('calendar/{month}', 'CalendarController@index');
 Route::get('migrate_tree', 'SeedsController@migrate_tree');
