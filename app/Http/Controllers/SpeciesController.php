@@ -33,7 +33,7 @@ class SpeciesController extends Controller
 
     }
 
-    public function create(Request $request)
+    public function create(\Illuminate\Http\Request $request)
     {
         $parent_id = $request->get('parent_id');
 
@@ -56,14 +56,14 @@ class SpeciesController extends Controller
     {
         $request->persist();
 
-        return redirect('seeds');
+        return redirect('/seed');
     }
 
     public function update(UpdateSpecies $request)
     {
         $request->persist();
 
-        return redirect('seeds');
+        return redirect('/seed');
     }
 
 

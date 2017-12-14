@@ -24,7 +24,7 @@ class SeedsController extends Controller
         $filter_on_species = Request::get('species');
 
         $sessionWatcher->watch(new WatchedSession('search', !is_null($search), $search));
-        $sessionWatcher->watch(new WatchedSession('filter_on_species', $filter_on_species !== 0 , $filter_on_species));
+        $sessionWatcher->watch(new WatchedSession('filter_on_species', $filter_on_species !== null , $filter_on_species));
 
         $seeds_query = null;
 
@@ -38,6 +38,7 @@ class SeedsController extends Controller
                 $seeds_query = $seeds_query->filterSpecies(Session::get('filter_on_species'));
             } else {
                 $seeds_query = Seed::filterSpecies(Session::get('filter_on_species'));
+                //dd($seeds_query->toSql());
             }
         }
 
@@ -45,7 +46,7 @@ class SeedsController extends Controller
             $seeds = Seed::paginate(15); //show all seeds paginated
         } else {
             //$seeds = $seeds_query->paginate(15);
-            dd($seeds_query->toSql());
+            $seeds = $seeds_query->paginate(15);
         }
 
         $species = Species::get()->toTree();

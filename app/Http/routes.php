@@ -11,22 +11,25 @@
 |
 */
 
-Route::get('/', 'SeedsController@index');
+Route::group(['middleware' => 'web'], function () {
+    Route::get('/', 'SeedsController@index');
 
-Route::get('calendar/{month}', 'CalendarController@index');
-Route::get('migrate_tree', 'SeedsController@migrate_tree');
+    Route::get('calendar/{month}', 'CalendarController@index');
+    Route::get('migrate_tree', 'SeedsController@migrate_tree');
 
-Route::controllers([
-	'auth' => 'Auth\AuthController',
-	'password' => 'Auth\PasswordController',
-]);
+    Route::controllers([
+        'auth' => 'Auth\AuthController',
+        'password' => 'Auth\PasswordController',
+    ]);
 
-Route::get('stock/create/{seed_id}', 'StockItemsController@create');
+    Route::get('stock/create/{seed_id}', 'StockItemsController@create');
 
-Route::resource('seed', 'SeedsController');
-Route::resource('species', 'SpeciesController');
+    Route::resource('seed', 'SeedsController');
+    Route::resource('species', 'SpeciesController');
 
-Route::resource('stock', 'StockItemsController');
+    Route::resource('stock', 'StockItemsController');
 
-Route::get('sowings/{year}', 'SowingsController@index')->where('year', '[0-9]+');
-Route::resource('sowings', 'SowingsController');
+    Route::get('sowings/{year}', 'SowingsController@index')->where('year', '[0-9]+');
+    Route::resource('sowings', 'SowingsController');
+});
+

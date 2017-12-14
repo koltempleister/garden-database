@@ -46,7 +46,7 @@ class SessionWatcher
      */
     public function watchedSessionIsRegistered()
     {
-        return $this->atLeastOne;
+        return ! $this->atLeastOne;
     }
 
     /**

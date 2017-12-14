@@ -142,10 +142,7 @@ class Seed extends Model {
 
     public function scopeFilterSpecies($query, $species_id)
     {
-        return $query->whereHas('species', function($query) use ($species_id)
-        {
-            return $query->where('id','=', $species_id)->children();
-        });
+        return $query->where('species_id' , $species_id);
 
     }
 }
