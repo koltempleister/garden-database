@@ -23,7 +23,9 @@ class Seed extends Model {
     ];
 
     public $timestamps = false;
-    
+
+    protected $with = ['species'];
+
     public function stock_items()
     {
         return $this->hasMany('App\Stock_item');
