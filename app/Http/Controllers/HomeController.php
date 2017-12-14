@@ -35,7 +35,7 @@ class HomeController extends Controller {
 
     public function singlePage()
     {
-return 'single-page';
+        return view('single_page');
         
 	}
 
