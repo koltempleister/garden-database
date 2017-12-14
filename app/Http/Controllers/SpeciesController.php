@@ -2,14 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Transformers\SpeciesTreeTransformer;
-use Illuminate\Support\Facades\Redirect;
 use \Request;
 use Response;
-
-use App\Http\Requests\CreateSpecies;
-
 use App\Species;
+use App\Http\Requests\CreateSpecies;
+use App\Http\Requests\UpdateSpecies;
+use App\Transformers\SpeciesTreeTransformer;
+
 
 class SpeciesController extends Controller
 {
@@ -24,23 +23,19 @@ class SpeciesController extends Controller
         $species_transformed = $transformer->transformCollection($species);
 
         if (Request::get('format') != 'ajax') {
-
-
             return view('species.nodes', compact('species'));
         } else {
+            $species_json = json_encode($species_transformed);
             //temp output view
-            return view('species.react', compact('species_transformed'));
-//            return Response::json(
- //               compact('species_transformed'),
-   //             200
-     //       );
+            return view('species.vue', compact('species_json'));
+
         }
 
     }
 
-    public function create()
+    public function create(Request $request)
     {
-        $parent_id = Request::get('parent_id');
+        $parent_id = $request->get('parent_id');
 
         $species = new Species;
         $species->parent_id = $parent_id;
@@ -50,10 +45,8 @@ class SpeciesController extends Controller
         return view('species.create', compact('species', 'parents'));
     }
 
-    public function edit($id)
+    public function edit($species)
     {
-        $species = Species::find($id);
-
         $parents = Species::parentsTreeArray();
         
         return view('species.edit',compact('species', 'parents'));
@@ -61,16 +54,14 @@ class SpeciesController extends Controller
 
     public function store(CreateSpecies $request)
     {
-        Species::create($request->all());
+        $request->persist();
 
         return redirect('seeds');
     }
 
-    public function update($id, CreateSpecies $request)
+    public function update(UpdateSpecies $request)
     {
-        $species == Species::find($id);
-
-        $species->update($request->all());
+        $request->persist();
 
         return redirect('seeds');
     }

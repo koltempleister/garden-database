@@ -159,6 +159,7 @@ return [
 		'App\Providers\EventServiceProvider',
 		'App\Providers\RouteServiceProvider',
 		'App\Providers\AuthServiceProvider',
+        Barryvdh\Debugbar\ServiceProvider::class,
 
 	],
 
@@ -209,7 +210,8 @@ return [
 		'View'      => Illuminate\Support\Facades\View::class,
 		'Gate'      => Illuminate\Support\Facades\Gate::class,
         'Form'      => Collective\Html\FormFacade::class,
-        'Html'      => Collective\Html\HtmlFacade::class
+        'Html'      => Collective\Html\HtmlFacade::class,
+        'DebugBar' => Barryvdh\Debugbar\Facade::class
 	],
 
 ];

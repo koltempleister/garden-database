@@ -1,8 +1,6 @@
 <?php namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateStockItem;
-use App\Http\Requests\SearchStockItem;
 use App\Seed;
 use App\Stock_item;
 use App\Supplier;
@@ -14,7 +12,6 @@ class StockItemsController extends Controller {
     	/**
     	 *@todo filtering  
     	 */
-    	// $seeds = Seed :: has('stock_items')->get();
     	$seeds = Seed :: unavailable()->get();
 
     	$statuses = Stock_item::statuses();

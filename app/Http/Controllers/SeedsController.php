@@ -1,5 +1,6 @@
 <?php namespace App\Http\Controllers;
 
+use App\Http\Requests\UpdateSeed;
 use Illuminate\Support\Facades\Request;
 use App\Http\Requests\CreateSeed;
 use App\Seed;
@@ -24,7 +25,7 @@ class SeedsController extends Controller
 
         $sessionWatcher->watch(new WatchedSession('search', !is_null($search), $search));
         $sessionWatcher->watch(new WatchedSession('filter_on_species', $filter_on_species !== 0 , $filter_on_species));
-        
+
         $seeds_query = null;
 
         if (Session::get('search') != false) {
@@ -39,7 +40,7 @@ class SeedsController extends Controller
                 $seeds_query = Seed::filterSpecies(Session::get('filter_on_species'));
             }
         }
-        
+
         if ($sessionWatcher->watchedSessionIsRegistered()) {
             $seeds = Seed::paginate(15); //show all seeds paginated
         } else {
@@ -47,11 +48,9 @@ class SeedsController extends Controller
             dd($seeds_query->toSql());
         }
 
+        $species = Species::get()->toTree();
 
-         $species = Species::get()->toTree();
-// dd($species);
-
-         return view('seeds.index', compact('seeds', 'species'));
+        return view('seeds.index', compact('seeds', 'species'));
      }
 
     /**
@@ -63,12 +62,8 @@ class SeedsController extends Controller
         Species:: fixTree();
     }
 
-    public function show($id)
+    public function show($seed)
     {
-        $seed = Seed::find($id);
-
-        if (is_null($seed)) abort(404);
-
         return view('seeds.show', compact('seed'));
     }
 
@@ -83,24 +78,22 @@ class SeedsController extends Controller
 
     public function store(CreateSeed $request)
     {
-        Seed::create($request->all());
+        $request->persist();
 
         return redirect('seeds');
     }
 
-    public function edit($id)
+    public function edit($seed)
     {
-        $seed = Seed::findOrFail($id);
         $species = Species::lists('name', 'id');
         $sowing_periods = Seed::sowingPeriods();
 
         return view('seeds.edit', compact('seed', 'species', 'sowing_periods'));
     }
 
-    public function update($id, CreateSeed $request)
+    public function update(UpdateSeed $request)
     {
-        $seed = Seed::findOrFail($id);
-        $seed->update($request->all());
+        $request->persist();
 
         return redirect('seeds');
     }

@@ -1,5 +1,9 @@
 <?php namespace App\Providers;
 
+use App\Seed;
+use App\Species;
+use App\Stock_item;
+use App\Supplier;
 use Illuminate\Routing\Router;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 
@@ -25,6 +29,11 @@ class RouteServiceProvider extends ServiceProvider {
 		//
 		
 		parent::boot($router);
+
+		$router->model('species' ,Species::class);
+		$router->model('seed' ,Seed::class);
+		$router->model('stock_item', Stock_item::class);
+		$router->model('supplier', Supplier::class);
 	}
 
 	/**

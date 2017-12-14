@@ -27,4 +27,10 @@ class CreateSeed extends Request {
 		];
 	}
 
+    public function persist()
+    {
+
+        Seed::create($this->all());
+	}
+
 }

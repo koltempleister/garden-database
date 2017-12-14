@@ -3,9 +3,11 @@
 namespace App\Http\Requests;
 
 use App\Http\Requests\Request;
+use App\Species;
 
 class CreateSpecies extends Request
 {
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -27,5 +29,11 @@ class CreateSpecies extends Request
             'name' => 'required',
             'parent_id' => 'required'
         ];
+    }
+
+    public function persist()
+    {
+
+        Species::create($this->all());
     }
 }

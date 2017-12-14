@@ -18,9 +18,9 @@
 					<tr>
 						<td>{{$seed->name}}</td>		 
 				        <td>
-				    	  <a href="seeds/{{$seed->id}}" class="btn btn-default btn-xs">details</a>
-						  <a href="seeds/{{$seed->id}}/edit" class="btn btn-default btn-xs">edit</a>
-						  <a href="stock/{{$seed->id}}" class="btn btn-default btn-xs">stock ({{$seed->stock_items->count()}})</a>
+				    	  <a href="{{route('seed.show', $seed->id)}}" class="btn btn-default btn-xs">details</a>
+						  <a href="{{route('seed.edit', $seed->id)}}" class="btn btn-default btn-xs">edit</a>
+						  <a href="{{route('stock.show', $seed->id)}}" class="btn btn-default btn-xs">stock ({{$seed->stock_items->count()}})</a>
 						  <a href="" class="btn btn-default btn-xs">delete</a>
 						</td>    
 				   </tr>     

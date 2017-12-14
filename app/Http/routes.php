@@ -11,10 +11,6 @@
 |
 */
 
-//Route::get('/', 'WelcomeController@index');
-
-
-
 Route::get('/', 'SeedsController@index');
 
 Route::get('calendar/{month}', 'CalendarController@index');
@@ -23,13 +19,12 @@ Route::get('migrate_tree', 'SeedsController@migrate_tree');
 Route::controllers([
 	'auth' => 'Auth\AuthController',
 	'password' => 'Auth\PasswordController',
-	
 ]);
-Route::get('stock/create/{seed_id}', 'StockItemsController@create');
-//Route::get('stock/{status?}', 'StockItemsController@index'); //deze confilicteer momenteel met controller.show, bedoeling om te filteren in create
-Route::resource('seeds', 'SeedsController');
-Route::resource('species', 'SpeciesController');
 
+Route::get('stock/create/{seed_id}', 'StockItemsController@create');
+
+Route::resource('seed', 'SeedsController');
+Route::resource('species', 'SpeciesController');
 
 Route::resource('stock', 'StockItemsController');
 
