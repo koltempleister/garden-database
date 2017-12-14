@@ -52,7 +52,7 @@ class Seed extends Model {
      */
     public function getSpeciesListAttribute()
     {
-        return $this->species()->lists('id');
+        return $this->species()->pluck('id');
     }
 
     public function getOutsideFromAttribute($value)

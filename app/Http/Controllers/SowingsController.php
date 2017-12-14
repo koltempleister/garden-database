@@ -32,7 +32,7 @@ class SowingsController extends Controller {
 			
 		});
 
-		$years = Sowing :: distinct('year')->lists('year');
+		$years = Sowing :: distinct('year')->pluck('year');
 
 		return view('sowings.index', compact('years','places'));
 	}
@@ -44,7 +44,7 @@ class SowingsController extends Controller {
 	 */
 	public function create()
 	{
-		$places = Place :: all() -> lists('name','id');
+		$places = Place :: all() -> pluck('name','id');
 		$stock_items_list = Stock_item :: available();
 
 		$sowing = new Sowing();
@@ -91,7 +91,7 @@ class SowingsController extends Controller {
 	 */
 	public function edit($id)
 	{
-		$places = Place :: all() -> lists('name','id');
+		$places = Place :: all() -> pluck('name','id');
 		$stock_items_list = Stock_item :: available();
 		$sowing = Sowing :: find($id);
 		

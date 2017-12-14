@@ -28,7 +28,7 @@ class StockItemsController extends Controller {
     {
     	$seed = Seed::findOrFail($id);
     	$statuses = Stock_item::statuses();
-    	$supplier_list = Supplier::lists('name', 'id');
+    	$supplier_list = Supplier::pluck('name', 'id');
     	$stock_item = new Stock_item(); //intitialise otherwise form fails!
 
 		return view('stock_items.create', compact('seed','supplier_list', 'statuses', 'stock_item'));
@@ -45,7 +45,7 @@ class StockItemsController extends Controller {
     {
     	$stock_item = Stock_item::findOrFail($id);
     	$statuses = Stock_item::statuses();
-    	$supplier_list = Supplier::lists('name', 'id');
+    	$supplier_list = Supplier::pluck('name', 'id');
 
     	return view('stock_items.edit', compact('stock_item', 'statuses', 'supplier_list'));
     }

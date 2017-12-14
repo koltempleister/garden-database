@@ -5,9 +5,9 @@
 	"license": "MIT",
 	"type": "project",
 	"require": {
-		"laravel/framework": "5.2.*",
-		"LaravelCollective/html": "5.2.*",
-		"kalnoy/nestedset": "^4.1",
+		"laravel/framework": "5.3.*",
+		"LaravelCollective/html": "5.3.*",
+		"kalnoy/nestedset": "4.2.*",
 		"barryvdh/laravel-debugbar": "^2.3"
 	},
 	"require-dev": {

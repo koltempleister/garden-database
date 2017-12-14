@@ -11,7 +11,6 @@
 |
 */
 
-
 Auth::routes();
 Route::get('/logout', 'Auth\LoginController@logout');
 
@@ -23,22 +22,10 @@ Route::get('migrate_tree', 'SeedsController@migrate_tree');
 
 Route::get('stock/create/{seed_id}', 'StockItemsController@create');
 
-Route::group(['middleware'=>'bindings'], function(){
-    Route::get('seed','SeedsController@index');
-    Route::get('seed/{seed}','SeedsController@show')->name('seed.show');
-    Route::get('seed/{seed}/edit','SeedsController@edit')->name('seed.edit');
-    Route::put('seed/{seed}','SeedsController@update');
-    Route::put('seed/create','SeedsController@create');
-    Route::post('seed','SeedsController@store');
-});
-
-
-
+Route::resource('seed', 'SeedsController');
 Route::resource('species', 'SpeciesController');
 
 Route::resource('stock', 'StockItemsController');
 
 Route::get('sowings/{year}', 'SowingsController@index')->where('year', '[0-9]+');
 Route::resource('sowings', 'SowingsController');
-
-

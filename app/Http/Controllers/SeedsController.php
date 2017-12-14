@@ -70,7 +70,7 @@ class SeedsController extends Controller
 
     public function create()
     {
-        $species = Species::lists('name', 'id');
+        $species = Species::pluck('name', 'id');
         $sowing_periods = Seed::sowingPeriods();
         $seed = new Seed(); //initialise otherwise form fails!
 
@@ -86,7 +86,7 @@ class SeedsController extends Controller
 
     public function edit($seed)
     {
-        $species = Species::lists('name', 'id');
+        $species = Species::pluck('name', 'id');
         $sowing_periods = Seed::sowingPeriods();
 
         return view('seeds.edit', compact('seed', 'species', 'sowing_periods'));

@@ -1,5 +1,6 @@
 <?php namespace App\Providers;
 
+use Route;
 use App\Seed;
 use App\Species;
 use App\Stock_item;
@@ -24,16 +25,16 @@ class RouteServiceProvider extends ServiceProvider {
 	 * @param  \Illuminate\Routing\Router  $router
 	 * @return void
 	 */
-	public function boot(Router $router)
+	public function boot()
 	{
 		//
 		
-		parent::boot($router);
+		parent::boot();
 
-		$router->model('species' ,Species::class);
-		$router->model('seed' ,Seed::class);
-		$router->model('stock_item', Stock_item::class);
-		$router->model('supplier', Supplier::class);
+		Route::model('species' ,Species::class);
+		Route::model('seed' , Seed::class);
+		Route::model('stock_item', Stock_item::class);
+		Route::model('supplier', Supplier::class);
 	}
 
 	/**

@@ -1,7 +1,7 @@
 <?php
 
 return [
-
+    'name' => 'Garden Database',
     /*
     |--------------------------------------------------------------------------
     | Application Environment
@@ -95,7 +95,7 @@ return [
 
 	'key' => env('APP_KEY', 'SomeRandomString'),
 
-	'cipher' => MCRYPT_RIJNDAEL_128,
+	'cipher' => 'AES-256-CBC',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -128,37 +128,39 @@ return [
 		/*
 		 * Laravel Framework Service Providers...
 		 */
-		'Illuminate\Foundation\Providers\ArtisanServiceProvider',
-		'Illuminate\Auth\AuthServiceProvider',
-		'Illuminate\Bus\BusServiceProvider',
-		'Illuminate\Cache\CacheServiceProvider',
-		'Illuminate\Foundation\Providers\ConsoleSupportServiceProvider',
-		'Illuminate\Cookie\CookieServiceProvider',
-		'Illuminate\Database\DatabaseServiceProvider',
-		'Illuminate\Encryption\EncryptionServiceProvider',
-		'Illuminate\Filesystem\FilesystemServiceProvider',
-		'Illuminate\Foundation\Providers\FoundationServiceProvider',
-		'Illuminate\Hashing\HashServiceProvider',
-		'Illuminate\Mail\MailServiceProvider',
-		'Illuminate\Pagination\PaginationServiceProvider',
-		'Illuminate\Pipeline\PipelineServiceProvider',
-		'Illuminate\Queue\QueueServiceProvider',
-		'Illuminate\Redis\RedisServiceProvider',
-		'Illuminate\Auth\Passwords\PasswordResetServiceProvider',
-		'Illuminate\Session\SessionServiceProvider',
-		'Illuminate\Translation\TranslationServiceProvider',
-		'Illuminate\Validation\ValidationServiceProvider',
-		'Illuminate\Broadcasting\BroadcastServiceProvider',
-		'Illuminate\View\ViewServiceProvider',
-        'Collective\Html\HtmlServiceProvider',
+		Illuminate\Foundation\Providers\ArtisanServiceProvider::class,
+		Illuminate\Auth\AuthServiceProvider::class,
+		Illuminate\Bus\BusServiceProvider::class,
+		Illuminate\Cache\CacheServiceProvider::class,
+		Illuminate\Foundation\Providers\ConsoleSupportServiceProvider::class,
+		Illuminate\Cookie\CookieServiceProvider::class,
+		Illuminate\Database\DatabaseServiceProvider::class,
+		Illuminate\Encryption\EncryptionServiceProvider::class,
+		Illuminate\Filesystem\FilesystemServiceProvider::class,
+		Illuminate\Foundation\Providers\FoundationServiceProvider::class,
+		Illuminate\Hashing\HashServiceProvider::class,
+		Illuminate\Mail\MailServiceProvider::class,
+		Illuminate\Pagination\PaginationServiceProvider::class,
+		Illuminate\Pipeline\PipelineServiceProvider::class,
+		Illuminate\Queue\QueueServiceProvider::class,
+		Illuminate\Redis\RedisServiceProvider::class,
+		Illuminate\Auth\Passwords\PasswordResetServiceProvider::class,
+		Illuminate\Session\SessionServiceProvider::class,
+		Illuminate\Translation\TranslationServiceProvider::class,
+		Illuminate\Validation\ValidationServiceProvider::class,
+		Illuminate\Broadcasting\BroadcastServiceProvider::class,
+		Illuminate\View\ViewServiceProvider::class,
+        Collective\Html\HtmlServiceProvider::class,
+        Illuminate\Notifications\NotificationServiceProvider::class,
         /*
 		 * Application Service Providers...
 		 */
-		'App\Providers\AppServiceProvider',
-		'App\Providers\ConfigServiceProvider',
-		'App\Providers\EventServiceProvider',
-		'App\Providers\RouteServiceProvider',
-		'App\Providers\AuthServiceProvider',
+
+        App\Providers\AppServiceProvider::class,
+        App\Providers\ConfigServiceProvider::class,
+        App\Providers\EventServiceProvider::class,
+        App\Providers\RouteServiceProvider::class,
+        App\Providers\AuthServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
 
 	],
@@ -211,7 +213,8 @@ return [
 		'Gate'      => Illuminate\Support\Facades\Gate::class,
         'Form'      => Collective\Html\FormFacade::class,
         'Html'      => Collective\Html\HtmlFacade::class,
-        'DebugBar' => Barryvdh\Debugbar\Facade::class
+        'DebugBar' => Barryvdh\Debugbar\Facade::class,
+        'Notification' => Illuminate\Support\Facades\Notification::class
 	],
 
 ];
