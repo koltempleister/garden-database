@@ -1,5 +1,8 @@
 @extends('app')
 
 @section('content')
-	<seeds></seeds>
+hieronder de app
+	<div id="app">
+
+	</div>
 @endsection
