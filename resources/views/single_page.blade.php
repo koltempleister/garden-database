@@ -1,7 +1,7 @@
 @extends('app')
 
 @section('content')
-hieronder de app
+{{--hieronder de app--}}
 	<div id="app">
 
 	</div>

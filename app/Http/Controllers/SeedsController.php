@@ -43,7 +43,8 @@ class SeedsController extends Controller
         }
 
         if ($sessionWatcher->watchedSessionIsRegistered()) {
-            $seeds = Seed::paginate(15); //show all seeds paginated
+//            $seeds = Seed::paginate(15); //show all seeds paginated
+                $seeds=Seed::all();
         } else {
             //$seeds = $seeds_query->paginate(15);
             $seeds = $seeds_query->paginate(15);
