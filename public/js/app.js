@@ -13596,7 +13596,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     components: {
         Seed: __WEBPACK_IMPORTED_MODULE_0__seed___default.a
     },
-    name: "listSeeds",
+    name: "list-seeds",
     data: function data() {
         return {
             // seeds: [

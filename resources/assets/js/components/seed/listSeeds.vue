@@ -18,7 +18,7 @@
         components: {
             Seed
         },
-        name: "listSeeds",
+        name: "list-seeds",
         data() {
             return {
                 // seeds: [

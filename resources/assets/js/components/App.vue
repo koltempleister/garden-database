@@ -6,7 +6,7 @@
 </template>
 
 <script>
-    import listSeeds from './listSeeds.vue';
+    import listSeeds from './seed/listSeeds.vue';
 
     export default {
         name: "app.vue",
