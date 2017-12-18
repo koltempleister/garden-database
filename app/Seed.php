@@ -24,7 +24,7 @@ class Seed extends Model {
 
     public $timestamps = false;
 
-    protected $with = ['species'];
+    protected $with = ['species', 'stock_items'];
 
     public function stock_items()
     {
