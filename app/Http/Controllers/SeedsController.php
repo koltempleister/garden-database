@@ -100,7 +100,5 @@ class SeedsController extends Controller
     public function update(UpdateSeed $request)
     {
         $request->persist();
-
-        return redirect('/seed');
     }
 }

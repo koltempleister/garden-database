@@ -14,12 +14,12 @@
             <div>harvest: {{seed.harvest_from.formatted}} - {{seed.harvest_till.formatted}}</div>
         </div>
         <list-stock-item v-if="stock" :stockitems="seed.stock_items"></list-stock-item>
+        <update-seed v-if="edit" :seed="seed"></update-seed>
     </div>
 </template>
 
 <script>
      import ListStockItem from '../stockItem/listStockItem.vue';
-     import VodalUpdateSeed from 'vodal';
      import UpdateSeed from './updateSeed.vue';
 
     export default {
@@ -33,6 +33,7 @@
             }
         },
         components: {
+            UpdateSeed,
             ListStockItem,
         },
     }

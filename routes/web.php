@@ -27,7 +27,7 @@ Route::group(['middleware'=>'bindings'], function(){
     Route::get('seed','SeedsController@index');
     Route::get('seed/{seed}','SeedsController@show')->name('seed.show');
     Route::get('seed/{seed}/edit','SeedsController@edit')->name('seed.edit');
-    Route::put('seed/{seed}','SeedsController@update');
+    Route::patch('seed/{seed}','SeedsController@update')->name('seed.update');;
     Route::put('seed/create','SeedsController@create');
     Route::post('seed','SeedsController@store');
 });
