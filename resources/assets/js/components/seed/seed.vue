@@ -25,7 +25,6 @@
 <script>
      import ListStockItem from '../stockItem/listStockItem.vue';
      import UpdateSeed from './updateSeed.vue';
-     import MenuItem from '../menuItem';
 
     export default {
         name: "seed",
