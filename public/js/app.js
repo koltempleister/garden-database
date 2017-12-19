@@ -13713,7 +13713,7 @@ exports = module.exports = __webpack_require__(1)(undefined);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -13728,6 +13728,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__stockItem_listStockItem_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__stockItem_listStockItem_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__updateSeed_vue__ = __webpack_require__(61);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__updateSeed_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__updateSeed_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__menuItem__ = __webpack_require__(108);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__menuItem___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__menuItem__);
 //
 //
 //
@@ -13748,6 +13750,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+
 
 
 
@@ -13765,7 +13768,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     components: {
         UpdateSeed: __WEBPACK_IMPORTED_MODULE_1__updateSeed_vue___default.a,
-        ListStockItem: __WEBPACK_IMPORTED_MODULE_0__stockItem_listStockItem_vue___default.a
+        ListStockItem: __WEBPACK_IMPORTED_MODULE_0__stockItem_listStockItem_vue___default.a,
+        MenuItem: __WEBPACK_IMPORTED_MODULE_2__menuItem___default.a
     }
 });
 
@@ -14274,31 +14278,32 @@ var render = function() {
         [_vm._v(_vm._s(_vm.seed.name))]
       ),
       _vm._v(" "),
-      _c("div", [
-        _c(
-          "span",
-          {
+      _c(
+        "div",
+        [
+          _c("menu-item", {
+            attrs: { title: "edit" },
             on: {
               click: function($event) {
                 _vm.edit = !_vm.edit
               }
             }
-          },
-          [_vm._v("[edit]")]
-        ),
-        _c(
-          "span",
-          {
-            on: {
-              click: function($event) {
-                _vm.stock = !_vm.stock
+          }),
+          _c(
+            "span",
+            {
+              on: {
+                click: function($event) {
+                  _vm.stock = !_vm.stock
+                }
               }
-            }
-          },
-          [_vm._v("[stock]")]
-        ),
-        _vm._v("[delete]")
-      ]),
+            },
+            [_vm._v("[stock]")]
+          ),
+          _vm._v("[delete]")
+        ],
+        1
+      ),
       _vm._v(" "),
       _vm.detail
         ? _c("div", [
@@ -14885,7 +14890,7 @@ exports = module.exports = __webpack_require__(1)(undefined);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -14907,13 +14912,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: "dropdown-species",
+    props: ['seed'],
     data: function data() {
         return {
             allspecies: [],
-            flatTree: []
+            flatTree: [],
+            species_id: this.seed.species_id
         };
     },
     created: function created() {
@@ -14926,11 +14934,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         });
     },
 
-    //https://stackoverflow.com/questions/39740660/render-a-select-recursively-in-vue-js#39744577
+    /**
+     * flatten tree
+     * https://stackoverflow.com/questions/39740660/render-a-select-recursively-in-vue-js#39744577
+     */
     computed: {
         flatTreeSpecies: function flatTreeSpecies() {
 
             return this.flat(this.allspecies);
+        }
+    },
+    watch: {
+        species_id: function species_id() {
+            console.log('species_id selected');
+            this.seed.species_id = this.species_id;
         }
     },
     methods: {
@@ -14961,11 +14978,44 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "select",
-    { attrs: { name: "species_id" } },
+    {
+      directives: [
+        {
+          name: "model",
+          rawName: "v-model",
+          value: _vm.species_id,
+          expression: "species_id"
+        }
+      ],
+      attrs: { name: "species_id" },
+      on: {
+        change: function($event) {
+          var $$selectedVal = Array.prototype.filter
+            .call($event.target.options, function(o) {
+              return o.selected
+            })
+            .map(function(o) {
+              var val = "_value" in o ? o._value : o.value
+              return val
+            })
+          _vm.species_id = $event.target.multiple
+            ? $$selectedVal
+            : $$selectedVal[0]
+        }
+      }
+    },
     _vm._l(_vm.flatTreeSpecies, function(species, index) {
-      return _c("option", { key: index, domProps: { value: species.id } }, [
-        _vm._v(_vm._s(species.name))
-      ])
+      return _c(
+        "option",
+        {
+          key: index,
+          domProps: {
+            value: species.id,
+            selected: species.id == _vm.seed.species_id
+          }
+        },
+        [_vm._v(_vm._s(species.name))]
+      )
     })
   )
 }
@@ -15066,7 +15116,7 @@ exports = module.exports = __webpack_require__(1)(undefined);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -15093,6 +15143,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: "seed-form",
     props: ['seed', 'action'],
+    // data () {
+    //     return {
+    //         id: this.species_id
+    //     }
+    // },
     components: {
         DropdownSpecies: __WEBPACK_IMPORTED_MODULE_0__species_dropdownSpecies_vue___default.a
     }
@@ -15132,16 +15187,7 @@ var render = function() {
         }
       }),
       _vm._v(" "),
-      _c("dropdown-species", {
-        attrs: { seed: _vm.seed },
-        model: {
-          value: _vm.seed.species_id,
-          callback: function($$v) {
-            _vm.$set(_vm.seed, "species_id", $$v)
-          },
-          expression: "seed.species_id"
-        }
-      }),
+      _c("dropdown-species", { attrs: { seed: _vm.seed } }),
       _vm._v(" "),
       _c("button", [_vm._v("Submit")])
     ],
@@ -15286,7 +15332,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         createSeed: function createSeed(event) {
             event.preventDefault();
 
-            var uri = 'http://zaden.local/seed/';
+            var uri = 'http://zaden.local/seed';
             console.log('submitting to' + uri);
             console.log(this.seed);
             Axios.post(uri, this.seed).then(function (response) {
@@ -15330,6 +15376,153 @@ if (false) {
   module.hot.accept()
   if (module.hot.data) {
     require("vue-hot-reload-api")      .rerender("data-v-377972aa", module.exports)
+  }
+}
+
+/***/ }),
+/* 103 */,
+/* 104 */,
+/* 105 */,
+/* 106 */,
+/* 107 */,
+/* 108 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(109)
+}
+var normalizeComponent = __webpack_require__(3)
+/* script */
+var __vue_script__ = __webpack_require__(111)
+/* template */
+var __vue_template__ = __webpack_require__(112)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = "data-v-2d12edae"
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/menuItem.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-2d12edae", Component.options)
+  } else {
+    hotAPI.reload("data-v-2d12edae", Component.options)
+' + '  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 109 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(110);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(2)("244af98d", content, false);
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-2d12edae\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./menuItem.vue", function() {
+     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-2d12edae\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./menuItem.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 110 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(1)(undefined);
+// imports
+
+
+// module
+exports.push([module.i, "\n.active[data-v-2d12edae]{\n    background-color: #00b3ee;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 111 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    name: "menu-item",
+    data: function data() {
+        return {
+            isactive: false
+        };
+    },
+
+    props: ['title']
+
+});
+
+/***/ }),
+/* 112 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "span",
+    { class: { active: _vm.isactive }, on: { click: _vm.isactive } },
+    [_vm._v(_vm._s(_vm.title))]
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-2d12edae", module.exports)
   }
 }
 

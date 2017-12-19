@@ -1,7 +1,7 @@
 <template>
     <div>
         <h3 v-on:click="detail = !detail">{{seed.name}}</h3>
-        <div><span v-on:click="edit= !edit">[edit]</span><span v-on:click="stock = !stock">[stock]</span>[delete]</div>
+        <div><menu-item v-on:click="edit= !edit" :title="'edit'"></menu-item><span v-on:click="stock = !stock">[stock]</span>[delete]</div>
         <div v-if="detail">
             <p>{{seed.remarks}}</p>
 
@@ -21,6 +21,7 @@
 <script>
      import ListStockItem from '../stockItem/listStockItem.vue';
      import UpdateSeed from './updateSeed.vue';
+     import MenuItem from '../menuItem';
 
     export default {
         name: "seed",
@@ -35,6 +36,7 @@
         components: {
             UpdateSeed,
             ListStockItem,
+            MenuItem
         },
     }
 </script>

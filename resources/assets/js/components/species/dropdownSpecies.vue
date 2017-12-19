@@ -1,10 +1,11 @@
 <template>
-    <select name="species_id">
+    <select name="species_id" v-model="species_id">
         <option
                 v-for="(species,index) in flatTreeSpecies"
                 v-bind:key="index"
                 v-bind:value="species.id"
 
+                :selected="species.id == seed.species_id"
         >{{species.name}}</option>
     </select>
 </template>
@@ -12,10 +13,12 @@
 <script>
     export default {
         name: "dropdown-species",
+        props:['seed'],
         data() {
             return {
                 allspecies:[],
-                flatTree:[]
+                flatTree:[],
+                species_id:this.seed.species_id
             };
         },
         created () {
@@ -25,12 +28,21 @@
                 this.allspecies = response.data;
             });
         },
-        //https://stackoverflow.com/questions/39740660/render-a-select-recursively-in-vue-js#39744577
+        /**
+         * flatten tree
+         * https://stackoverflow.com/questions/39740660/render-a-select-recursively-in-vue-js#39744577
+         */
         computed:{
             flatTreeSpecies(){
 
                 return this.flat(this.allspecies);
             }
+        },
+        watch:{
+          species_id(){
+              console.log('species_id selected');
+              this.seed.species_id = this.species_id
+          }
         },
         methods:{
 

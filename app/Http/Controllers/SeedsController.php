@@ -69,32 +69,11 @@ class SeedsController extends Controller
     public function show($seed)
     {
         return $seed;
-       // return view('seeds.show', compact('seed'));
-    }
-
-
-    public function create()
-    {
-        $species = Species::pluck('name', 'id');
-        $sowing_periods = Seed::sowingPeriods();
-        $seed = new Seed(); //initialise otherwise form fails!
-
-        return view('seeds.create', compact('seed', 'species', 'sowing_periods'));
     }
 
     public function store(CreateSeed $request)
     {
         $request->persist();
-
-        return redirect('/seed');
-    }
-
-    public function edit($seed)
-    {
-        $species = Species::pluck('name', 'id');
-        $sowing_periods = Seed::sowingPeriods();
-
-        return view('seeds.edit', compact('seed', 'species', 'sowing_periods'));
     }
 
     public function update(UpdateSeed $request)

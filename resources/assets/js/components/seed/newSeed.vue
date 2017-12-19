@@ -25,7 +25,7 @@
             createSeed (event) {
                 event.preventDefault();
 
-                let uri = 'http://zaden.local/seed/';
+                let uri = 'http://zaden.local/seed';
                 console.log('submitting to' + uri);
                 console.log(this.seed);
                 Axios.post(uri, this.seed).then((response) => {

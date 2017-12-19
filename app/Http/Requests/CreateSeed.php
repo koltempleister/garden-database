@@ -1,6 +1,7 @@
 <?php namespace App\Http\Requests;
 
 use App\Http\Requests\Request;
+use App\Seed;
 
 class CreateSeed extends Request {
 
