@@ -1,7 +1,11 @@
 <template>
     <div>
         <h3 v-on:click="detail = !detail">{{seed.name}}</h3>
-        <div><menu-item v-on:click="edit= !edit" :title="'edit'"></menu-item><span v-on:click="stock = !stock">[stock]</span>[delete]</div>
+        <nav>
+            <li v-on:click="edit = !edit">edit</li>
+            <li v-on:click="stock = !stock">stock</li>
+            <li>delete</li>
+        </nav>
         <div v-if="detail">
             <p>{{seed.remarks}}</p>
 
@@ -42,5 +46,7 @@
 </script>
 
 <style scoped>
-
+nav li {
+    display: inline;
+}
 </style>

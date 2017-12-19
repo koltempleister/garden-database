@@ -15,6 +15,7 @@
                 seed: {
                     "name": '',
                     "species_id": '',
+                    'id':null
                 },
             }
         },
@@ -30,9 +31,14 @@
                 console.log(this.seed);
                 Axios.post(uri, this.seed).then((response) => {
                     console.log('ajax call success');
+                    this.seedCreated;
                 }).catch((error) => {
                     console.log(error)
                 });
+            },
+            seedCreated(){
+                console.log("emitting event");
+                //emit event seed created
             }
         }
     }

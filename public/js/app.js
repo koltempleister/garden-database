@@ -1380,8 +1380,9 @@ module.exports = __webpack_require__(79);
 
 /***/ }),
 /* 13 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
+"use strict";
 // require('./bootstrap');
 
 window.Vue = __webpack_require__(14);
@@ -13568,7 +13569,7 @@ exports = module.exports = __webpack_require__(1)(undefined);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -13615,14 +13616,25 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         };
     },
     created: function created() {
-        var _this = this;
+        this.getSeeds();
+        eventHub.$on('seed-created', this.addSeed);
+        eventHub.$on('seed-created', this.create = false);
+    },
 
-        var uri = 'http://zaden.local/seed';
-        // let uri = 'http://zaden.local/seed/' + this.$route.params.id;
-        Axios.get(uri).then(function (response) {
-            console.log('ajax call made');
-            _this.seeds = response.data;
-        });
+    methods: {
+        getSeeds: function getSeeds() {
+            var _this = this;
+
+            var uri = 'http://zaden.local/seed';
+            // let uri = 'http://zaden.local/seed/' + this.$route.params.id;
+            Axios.get(uri).then(function (response) {
+                console.log('ajax call made');
+                _this.seeds = response.data;
+            });
+        },
+        addSeed: function addSeed(seed) {
+            this.seeds.push(seed);
+        }
     }
 });
 
@@ -13713,7 +13725,7 @@ exports = module.exports = __webpack_require__(1)(undefined);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\nnav li[data-v-34420070] {\n    display: inline;\n}\n", ""]);
 
 // exports
 
@@ -13730,6 +13742,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__updateSeed_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__updateSeed_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__menuItem__ = __webpack_require__(108);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__menuItem___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__menuItem__);
+//
+//
+//
+//
 //
 //
 //
@@ -13860,7 +13876,7 @@ exports = module.exports = __webpack_require__(1)(undefined);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\nli[data-v-0795afbe]{\n    list-style-type: none;\n}\n", ""]);
 
 // exports
 
@@ -14278,32 +14294,33 @@ var render = function() {
         [_vm._v(_vm._s(_vm.seed.name))]
       ),
       _vm._v(" "),
-      _c(
-        "div",
-        [
-          _c("menu-item", {
-            attrs: { title: "edit" },
+      _c("nav", [
+        _c(
+          "li",
+          {
             on: {
               click: function($event) {
                 _vm.edit = !_vm.edit
               }
             }
-          }),
-          _c(
-            "span",
-            {
-              on: {
-                click: function($event) {
-                  _vm.stock = !_vm.stock
-                }
+          },
+          [_vm._v("edit")]
+        ),
+        _vm._v(" "),
+        _c(
+          "li",
+          {
+            on: {
+              click: function($event) {
+                _vm.stock = !_vm.stock
               }
-            },
-            [_vm._v("[stock]")]
-          ),
-          _vm._v("[delete]")
-        ],
-        1
-      ),
+            }
+          },
+          [_vm._v("stock")]
+        ),
+        _vm._v(" "),
+        _c("li", [_vm._v("delete")])
+      ]),
       _vm._v(" "),
       _vm.detail
         ? _c("div", [
@@ -15291,7 +15308,7 @@ exports = module.exports = __webpack_require__(1)(undefined);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -15320,7 +15337,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         return {
             seed: {
                 "name": '',
-                "species_id": ''
+                "species_id": '',
+                'id': null
             }
         };
     },
@@ -15330,6 +15348,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     methods: {
         createSeed: function createSeed(event) {
+            var _this = this;
+
             event.preventDefault();
 
             var uri = 'http://zaden.local/seed';
@@ -15337,9 +15357,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             console.log(this.seed);
             Axios.post(uri, this.seed).then(function (response) {
                 console.log('ajax call success');
+                _this.seedCreated;
             }).catch(function (error) {
                 console.log(error);
             });
+        },
+        seedCreated: function seedCreated() {
+            console.log("emitting event");
+            eventHub.$emit('seedCreated', { seed: this.seed });
         }
     }
 });
@@ -15488,18 +15513,22 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: "menu-item",
     data: function data() {
         return {
-            isactive: false
+            isactive: this.route
         };
     },
 
-    props: ['title']
-
+    props: ['title', 'route'],
+    watch: {
+        isactive: function isactive() {
+            console.log('isactive selected');
+            this.route = this.isactive;
+        }
+    }
 });
 
 /***/ }),
@@ -15512,7 +15541,20 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "span",
-    { class: { active: _vm.isactive }, on: { click: _vm.isactive } },
+    {
+      on: {
+        click: function($event) {
+          _vm.isactive = !_vm.isactive
+        }
+      },
+      model: {
+        value: _vm.isactive,
+        callback: function($$v) {
+          _vm.isactive = $$v
+        },
+        expression: "isactive"
+      }
+    },
     [_vm._v(_vm._s(_vm.title))]
   )
 }

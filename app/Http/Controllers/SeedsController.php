@@ -73,7 +73,7 @@ class SeedsController extends Controller
 
     public function store(CreateSeed $request)
     {
-        $request->persist();
+        return $request->persist();
     }
 
     public function update(UpdateSeed $request)
