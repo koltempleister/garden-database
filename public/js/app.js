@@ -14885,7 +14885,7 @@ exports = module.exports = __webpack_require__(1)(undefined);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -14912,7 +14912,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     name: "dropdown-species",
     data: function data() {
         return {
-            allspecies: []
+            allspecies: [],
+            flatTree: []
         };
     },
     created: function created() {
@@ -14923,7 +14924,31 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             console.log('ajax call made');
             _this.allspecies = response.data;
         });
+    },
+
+    //https://stackoverflow.com/questions/39740660/render-a-select-recursively-in-vue-js#39744577
+    computed: {
+        flatTreeSpecies: function flatTreeSpecies() {
+
+            return this.flat(this.allspecies);
+        }
+    },
+    methods: {
+        flat: function flat(items) {
+            var final = [];
+            var self = this;
+            items.forEach(function (item) {
+                final.push(item);
+
+                if (typeof item.children !== 'undefined') {
+                    final = final.concat(self.flat(item.children));
+                }
+            });
+
+            return final;
+        }
     }
+
 });
 
 /***/ }),
@@ -14937,7 +14962,7 @@ var render = function() {
   return _c(
     "select",
     { attrs: { name: "species_id" } },
-    _vm._l(_vm.allspecies, function(species, index) {
+    _vm._l(_vm.flatTreeSpecies, function(species, index) {
       return _c("option", { key: index, domProps: { value: species.id } }, [
         _vm._v(_vm._s(species.name))
       ])
@@ -15108,6 +15133,7 @@ var render = function() {
       }),
       _vm._v(" "),
       _c("dropdown-species", {
+        attrs: { seed: _vm.seed },
         model: {
           value: _vm.seed.species_id,
           callback: function($$v) {
@@ -15219,7 +15245,7 @@ exports = module.exports = __webpack_require__(1)(undefined);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -15246,7 +15272,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     name: "update-seed",
     data: function data() {
         return {
-            seed: []
+            seed: {
+                "name": '',
+                "species_id": ''
+            }
         };
     },
 

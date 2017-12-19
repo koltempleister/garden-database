@@ -12,7 +12,10 @@
         name: "update-seed",
         data () {
             return {
-                seed: [],
+                seed: {
+                    "name": '',
+                    "species_id": '',
+                },
             }
         },
         components:{
