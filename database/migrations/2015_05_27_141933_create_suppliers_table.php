@@ -16,6 +16,8 @@ class CreateSuppliersTable extends Migration {
 		{
 			$table->integer('id', true);
 			$table->string('name')->unique('naam');
+
+            $table->softDeletes();
 		});
 	}
 

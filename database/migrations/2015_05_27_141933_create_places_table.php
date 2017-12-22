@@ -17,6 +17,8 @@ class CreatePlacesTable extends Migration {
 			$table->integer('id', true);
 			$table->string('name', 45)->nullable()->unique('naam');
 			$table->enum('location', array('binnen','buiten'))->nullable();
+
+            $table->softDeletes();
 		});
 	}
 

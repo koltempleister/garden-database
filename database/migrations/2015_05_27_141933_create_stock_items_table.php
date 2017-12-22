@@ -21,6 +21,8 @@ class CreateStockItemsTable extends Migration {
 			$table->integer('supplier_id')->index('leverancier_id');
 			$table->date('date_of_purchase');
 			$table->enum('status', array('besteld','in voorraad','niet meer in voorraad'));
+
+            $table->softDeletes();
 		});
 	}
 

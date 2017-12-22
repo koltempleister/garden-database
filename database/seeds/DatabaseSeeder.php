@@ -16,7 +16,8 @@ class DatabaseSeeder extends Seeder {
 
 		App\Species::truncate();
 
-		$this->call('SpeciesSeeder');
+		$this->call(SpeciesSeeder::class);
+		$this->call(SeedSeeder::class);
 	}
 
 }

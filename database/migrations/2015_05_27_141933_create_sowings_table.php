@@ -21,6 +21,8 @@ class CreateSowingsTable extends Migration {
 			$table->date('harvest_date')->nullable();
 			$table->integer('year');
 			$table->integer('seed_id');
+
+            $table->softDeletes();
 		});
 	}
 

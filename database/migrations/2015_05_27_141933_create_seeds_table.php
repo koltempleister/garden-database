@@ -30,6 +30,8 @@ class CreateSeedsTable extends Migration {
 			$table->integer('replant_possible')->nullable()->default(1);
 			$table->float('plant_out_from', 10, 0)->nullable();
 			$table->float('plant_out_till', 10, 0)->nullable();
+
+            $table->softDeletes();
 		});
 	}
 

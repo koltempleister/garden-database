@@ -15,6 +15,8 @@ class AlterSpeciesTable extends Migration
         Schema::table('species', function (Blueprint $table) {
             $table->unsignedInteger('_lft');
             $table->unsignedInteger('_rgt');
+
+
         });
     }
 

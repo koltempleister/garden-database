@@ -1,8 +1,11 @@
 <?php namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Stock_item extends Model {
+
+    use SoftDeletes;
 
     const AVAILABLE = 'in voorraad';    
     const UNAVAILABLE = 'niet meer in voorraad';    
