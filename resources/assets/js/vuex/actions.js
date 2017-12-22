@@ -14,17 +14,33 @@ export const addMessage  = ({ commit }, message) => {
     commit('ADD_MESSAGE', message);
 }
 
-export const addSeed = ({ commit, dispatch }, data ) => {
-    let formData = data[0];
-    let seed = data[1];
-
-    formData.preventDefault();
+export const addSeed = ({ commit, dispatch }, seed ) => {
 
     let uri = 'http://zaden.local/seed';
 
     Axios.post(uri, seed).then((response) => {
         commit('CREATE_SEED', response.data);
         dispatch('addMessage', 'new seed created');
+        dispatch('showSeedForm', false);
+    }).catch((error) => {
+        dispatch('addMessage', error.message);
+        console.log(error)
+    });
+}
+
+export const updateSeed = ({ commit, dispatch }, data ) => {
+    console.log('updateseed called');
+
+    //let formData = data[0];
+    let seed = data;
+
+    //formData.preventDefault();
+
+    let uri = 'http://zaden.local/seed/' + seed.id;
+
+    Axios.patch(uri, seed).then((response) => {
+        //commit('UPDATE_SEED', response.data);
+        dispatch('addMessage', 'seed updated online');
         dispatch('showSeedForm', false);
     }).catch((error) => {
         dispatch('addMessage', error.message);

@@ -1,9 +1,9 @@
 <template>
-    <form v-on:submit="action">
-        <input v-model="seed.name" name="name"/>
-        <dropdown-species :seed="seed"></dropdown-species>
-        <button>Submit</button>
-    </form>
+<div>
+    <input v-model="seed.name" name="name"/>
+    <dropdown-species :seed="seed"></dropdown-species>
+    <button @click.prevent="action">Submit</button>
+</div>
 </template>
 
 <script>
@@ -12,11 +12,6 @@
     export default {
         name: "seed-form",
         props:['seed','action'],
-        // data () {
-        //     return {
-        //         id: this.species_id
-        //     }
-        // },
         components:{
             DropdownSpecies
         },

@@ -1,12 +1,11 @@
 <template>
     <div>
-        <seed-form :seed="seed" :action="createSeed"  v-model="seed"></seed-form>
+        <seed-form :seed="seed" :action="addSeed"  v-model="seed"></seed-form>
     </div>
 </template>
 
 <script>
     import SeedForm from './seedForm.vue';
-    import { mapActions } from 'vuex'
 
     export default {
 
@@ -24,18 +23,11 @@
             SeedForm
         },
         methods:{
-            createSeed (event) {
-                console.log('seed');
-                console.log(this.seed);
-                this.addSeed([event, this.seed]);
-            },
-            seedCreated(){
-                console.log("emitting event");
-                //emit event seed created
-            },
-            ...mapActions([
-                'addSeed'
-            ])
+
+                addSeed () {
+                    this.$store.dispatch('addSeed', this.seed)
+                }
+
         }
     }
 </script>

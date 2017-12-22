@@ -1,12 +1,13 @@
 <template>
     <div>
         <div v-if="response"></div>
-        <seed-form :seed="seed" :action="updateSeed" v-model="seed"></seed-form>
+        <seed-form :seed="seed" :action="updateSeed" v-model="seed" ></seed-form>
     </div>
 </template>
 
 <script>
    import SeedForm from './seedForm.vue';
+   //import { mapActions, mapGetters } 'vuex'
 
     export default {
         data () {
@@ -15,29 +16,28 @@
           }
         },
         name: "update-seed",
-        props:['seed'],
         components:{
             SeedForm
         },
-        methods:{
-            updateSeed (event) {
-                event.preventDefault();
-
-                let uri = 'http://zaden.local/seed/' + this.seed.id;
-                console.log('submitting to' + uri);
-
-                var sendableSeed = this.seed;
-                delete sendableSeed.stock_items;
-                delete sendableSeed.species;
-
-                console.log(sendableSeed);
-                Axios.patch(uri, sendableSeed).then((response) => {
-                    console.log('ajax call success');
-                }).catch((error) => {
-                    console.log(error)
-                });
+        props:['id'],
+        computed:{
+            seed:{
+                get(){
+                    console.log(this.id);
+                   return this.$store.state.seeds.find(seed => seed.id === this.id);
+                },
+                set(value){
+                    console.log('call action updateseed');
+                    this.$store.dispatch("updateSeed", value)
+                }
+            }
+        },
+        methods: {
+            updateSeed () {
+                this.$store.dispatch("updateSeed", this.seed)
             }
         }
+
     }
 </script>
 
