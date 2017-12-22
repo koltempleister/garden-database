@@ -11,28 +11,26 @@
 </template>
 
 <script>
+
+    import { mapGetters } from 'vuex'
+
     export default {
         name: "dropdown-species",
         props:['seed'],
         data() {
             return {
-                allspecies:[],
                 flatTree:[],
                 species_id:this.seed.species_id
             };
-        },
-        created () {
-            let uri = 'http://zaden.local/species';
-            Axios.get(uri).then((response) => {
-                console.log('ajax call made');
-                this.allspecies = response.data;
-            });
         },
         /**
          * flatten tree
          * https://stackoverflow.com/questions/39740660/render-a-select-recursively-in-vue-js#39744577
          */
         computed:{
+            ...mapGetters({
+                allspecies: 'species'
+            }),
             flatTreeSpecies(){
 
                 return this.flat(this.allspecies);

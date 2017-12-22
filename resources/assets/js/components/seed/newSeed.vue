@@ -6,6 +6,7 @@
 
 <script>
     import SeedForm from './seedForm.vue';
+    import { mapActions } from 'vuex'
 
     export default {
 
@@ -24,22 +25,17 @@
         },
         methods:{
             createSeed (event) {
-                event.preventDefault();
-
-                let uri = 'http://zaden.local/seed';
-                console.log('submitting to' + uri);
+                console.log('seed');
                 console.log(this.seed);
-                Axios.post(uri, this.seed).then((response) => {
-                    console.log('ajax call success');
-                    this.seedCreated;
-                }).catch((error) => {
-                    console.log(error)
-                });
+                this.addSeed([event, this.seed]);
             },
             seedCreated(){
                 console.log("emitting event");
                 //emit event seed created
-            }
+            },
+            ...mapActions([
+                'addSeed'
+            ])
         }
     }
 </script>

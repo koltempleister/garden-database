@@ -14,23 +14,25 @@
 <script>
 
     import Species from "./species.vue";
+    import { mapActions, mapGetters } from 'vuex';
+    import { species } from '../../vuex/getters';
 
     export default {
         name: "list-species",
-        data() {
-            return {
-                species:[]
-            };
-        },
         components: {
             Species
         },
         created () {
-            let uri = 'http://zaden.local/species';
-            Axios.get(uri).then((response) => {
-                console.log('ajax call made');
-                this.species = response.data;
-            });
+            this.getSpeciesList();
+        },
+        computed: mapGetters({
+            species: 'species'
+        }),
+        methods:{
+            ...mapActions([
+                'getSpeciesList'
+            ]),
+
         }
     }
 </script>

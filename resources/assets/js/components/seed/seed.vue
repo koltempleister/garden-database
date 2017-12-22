@@ -39,7 +39,6 @@
         components: {
             UpdateSeed,
             ListStockItem,
-            MenuItem
         },
     }
 </script>
