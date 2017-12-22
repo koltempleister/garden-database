@@ -2,7 +2,7 @@
 $factory->define('App\Species', function (Faker\Generator $faker) {
     return [
         'name' => $faker->name,
-        'parent_id' => rand(1,10)
+        'parent_id' => rand(1,3)
     ];
 });
 
@@ -11,17 +11,17 @@ $factory->define('App\Seed', function (Faker\Generator $faker) {
         'name' => $faker->name,
         'species_id' => factory('App\Species')->create()->id,
         'remarks' => $faker->sentence,
-        'outside_from' => $faker->randomFloat(2, 0, 10),
-        'outside_till' => $faker->randomFloat(2, 0, 10),
-        'inside_from' => $faker->randomFloat(2, 0, 10),
-        'inside_till' => $faker->randomFloat(2, 0, 10),
-        'harvest_from' => $faker->numberBetween(0, 10),
-        'harvest_till' => $faker->numberBetween(0, 10),
+        'outside_from' => $faker->numberBetween(1, 36),
+        'outside_till' => $faker->numberBetween(1, 36),
+        'inside_from' => $faker->numberBetween(1, 36),
+        'inside_till' => $faker->numberBetween(1, 36),
+        'harvest_from' => $faker->numberBetween(1, 36),
+        'harvest_till' => $faker->numberBetween(1, 36),
         'time_till_harvest' => $faker->numberBetween(),
         'row_distance_cm' => $faker->numberBetween(0, 100),
         'thin_out_cm' => $faker->numberBetween(0, 100),
-        'plant_out_from' => $faker->randomFloat(2, 0, 10),
-        'plant_out_till' => $faker->randomFloat(2, 0, 10),
+        'plant_out_from' => $faker->numberBetween(1, 36),
+        'plant_out_till' => $faker->numberBetween(1, 36),
         'replant_possible' => $faker->boolean()
     ];
 });

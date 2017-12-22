@@ -49,56 +49,7 @@ class Seed extends Model {
         return ucfirst($value);
     }
 
-    /**
-     * 
-     * return an array of species ids
-     * 
-     * @return array
-     */
-    public function getSpeciesListAttribute()
-    {
-        return $this->species()->pluck('id');
-    }
 
-    public function getOutsideFromAttribute($value)
-    {
-        return array('value' => $value , 'formatted' => is_null($value) ? 'nvt' : self::sowingPeriods()[$value]);
-    }
-
-    public function getOutsideTillAttribute($value)
-    {
-        return array('value' => $value , 'formatted' => is_null($value) ? 'nvt' : self::sowingPeriods()[$value]);
-    }
-    
-    public function getInsideFromAttribute($value)
-    {
-        return array('value' => $value , 'formatted' => is_null($value) ? 'nvt' : self::sowingPeriods()[$value]);
-    }
-
-    public function getInsideTillAttribute($value)
-    {
-        return array('value' => $value , 'formatted' => is_null($value) ? 'nvt' : self::sowingPeriods()[$value]);
-    }
-    
-    public function getHarvestFromAttribute($value)
-    {
-        return array('value' => $value , 'formatted' => is_null($value) ? 'nvt' : self::sowingPeriods()[$value]);
-    }
-
-    public function getHarvestTillAttribute($value)
-    {
-        return array('value' => $value , 'formatted' => is_null($value) ? 'nvt' : self::sowingPeriods()[$value]);
-    }
-    
-    public function getPlantOutFromAttribute($value)
-    {
-        return array('value' => $value , 'formatted' => is_null($value) ? 'nvt' : self::sowingPeriods()[$value]);
-    }
-
-    public function getPlantOutTillAttribute($value)
-    {
-        return array('value' => $value , 'formatted' => is_null($value) ? 'nvt' : self::sowingPeriods()[$value]);
-    }
     
     /**
      * returns an array of sowing periods

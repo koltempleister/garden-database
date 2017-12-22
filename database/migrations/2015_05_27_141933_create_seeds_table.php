@@ -18,18 +18,18 @@ class CreateSeedsTable extends Migration {
 			$table->string('name')->unique('naam');
 			$table->integer('species_id')->index('soorten_idx');
 			$table->string('remarks')->nullable();
-			$table->float('outside_from', 10, 0)->nullable();
-			$table->float('outside_till', 10, 0)->nullable();
-			$table->float('inside_from', 10, 0)->nullable();
-			$table->float('inside_till', 10, 0)->nullable();
+			$table->integer('outside_from')->nullable();
+			$table->integer('outside_till')->nullable();
+			$table->integer('inside_from')->nullable();
+			$table->integer('inside_till')->nullable();
 			$table->integer('harvest_from')->nullable();
 			$table->integer('harvest_till')->nullable();
 			$table->integer('time_till_harvest')->nullable();
 			$table->integer('row_distance_cm')->nullable();
 			$table->integer('thin_out_cm')->nullable();
 			$table->integer('replant_possible')->nullable()->default(1);
-			$table->float('plant_out_from', 10, 0)->nullable();
-			$table->float('plant_out_till', 10, 0)->nullable();
+			$table->integer('plant_out_from')->nullable();
+			$table->integer('plant_out_till')->nullable();
 
             $table->softDeletes();
 		});
